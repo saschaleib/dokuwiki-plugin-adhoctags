@@ -82,14 +82,14 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
         // noPrefix: comma separated class names that should be excluded from
         //   being prefixed with "wrap_",
         //   each item may contain wildcard (*, ?)
-        $noPrefix = '/*/'; //($this->getConf('noPrefix') && $useNoPrefix) ? $pattern($this->getConf('noPrefix')) : '';
+        /* ($this->getConf('noPrefix') && $useNoPrefix) ? $pattern($this->getConf('noPrefix')) : ''; */
 
         // restrictedClasses : comma separated class names that should be checked
         //   based on restriction type (whitelist or blacklist),
         //   each item may contain wildcard (*, ?)
-        $restrictedClasses = ($this->getConf('restrictedClasses')) ?
+        /*$restrictedClasses = ($this->getConf('restrictedClasses')) ?
                             $pattern($this->getConf('restrictedClasses')) : '';
-        $restrictionType = $this->getConf('restrictionType');
+        $restrictionType = $this->getConf('restrictionType'); */
 
         foreach ($tokens as $token) {
 
@@ -123,13 +123,13 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
             //get classes
             //restrict token (class names) characters to prevent any malicious data
             if (preg_match('/[^A-Za-z0-9_-]/',$token)) continue;
-            if ($restrictedClasses) {
+            /*if ($restrictedClasses) {
                 $classIsInList = preg_match($restrictedClasses, $token);
                 // either allow only certain classes or disallow certain classes
                 if ($restrictionType xor $classIsInList) continue;
-            }
+            } */
             // prefix adjustment of class name
-            $prefix = (preg_match($noPrefix, $token)) ? '' : 'wrap_';
+            $prefix = ''; //(preg_match($noPrefix, $token)) ? '' : 'wrap_';
             $attr['class'] = (isset($attr['class']) ? $attr['class'].' ' : '').$prefix.$token;
 
         }
