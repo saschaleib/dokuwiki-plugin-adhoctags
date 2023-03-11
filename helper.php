@@ -82,7 +82,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
         // noPrefix: comma separated class names that should be excluded from
         //   being prefixed with "wrap_",
         //   each item may contain wildcard (*, ?)
-        $noPrefix = ($this->getConf('noPrefix') && $useNoPrefix) ? $pattern($this->getConf('noPrefix')) : '';
+        $noPrefix = '*'; //($this->getConf('noPrefix') && $useNoPrefix) ? $pattern($this->getConf('noPrefix')) : '';
 
         // restrictedClasses : comma separated class names that should be checked
         //   based on restriction type (whitelist or blacklist),
