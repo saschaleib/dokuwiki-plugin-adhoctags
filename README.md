@@ -42,7 +42,7 @@ Inline elements can appear inside a paragraph or other running text.
 
 - `<abbr>` – “[Abbreviation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr)”
 
-- `<b>`– “[Bring Attention To](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/b)” (also known as “bold”)
+- `<b>` – “[Bring Attention To](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/b)” (also known as “bold”)
 
 - `<cite>` – “[Citation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite)”
 
@@ -52,11 +52,17 @@ Inline elements can appear inside a paragraph or other running text.
 
 - `<kbd>` – “[Keyboard Input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)”
 
+- `<mark>` — “[Mark text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)”
+
 - `<q>` – “[Inline Quotation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q)”
 
 - `<s>` – “[Strikethrough](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s)”
 
 - `<samp>` – “[Sample Output](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp)”
+
+- `<small>` — “[Side content](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small)” (smaller)
+
+- `<span>` — “[Content span](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)” (this element can be disabled in the settings, in order to maintain compatibility with the Wrap plugin)
 
 - `<time>` – “[Date/Time](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time)”
 
