@@ -4,4 +4,5 @@
  *
  */
 
-$meta['handleSpan'] = array('onoff');
+$meta['inlineElements'] = array('multicheckbox', '_choices' => array('abbr','b','cite','dfn','i','kbd','mark','q','s','samp','small','span','time','u','var'),
+		'_other' => 'never');

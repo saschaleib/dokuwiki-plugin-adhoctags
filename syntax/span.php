@@ -12,13 +12,6 @@
 
 class syntax_plugin_adhoctags_span extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = '<span\b[^>\r\n]*?/>';
-    protected $entry_pattern   = '<span\b.*?>(?=.*?</span>)';
-    protected $exit_pattern    = '</span>';
-	protected $output_tag      = 'span';
+	protected $tag	= 'span';
 
-	/* the <span> tag can be disabled in the settings! */
-	protected function registerTag() {
-		return (bool) $this->getConf('handleSpan');
-	}
 }

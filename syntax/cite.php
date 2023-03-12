@@ -12,8 +12,6 @@
 
 class syntax_plugin_adhoctags_cite extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = ''; // (no empty tags!)
-    protected $entry_pattern   = '<cite\b.*?>(?=.*?</cite>)';
-    protected $exit_pattern    = '</cite>';
-	protected $output_tag      = 'cite';
+	protected $tag	= 'cite';
+
 }

@@ -12,8 +12,6 @@
 
 class syntax_plugin_adhoctags_q extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = ''; // (no empty tags!)
-    protected $entry_pattern   = '<q\b.*?>(?=.*?</q>)';
-    protected $exit_pattern    = '</q>';
-	protected $output_tag      = 'q';
+	protected $tag	= 'q';
+
 }

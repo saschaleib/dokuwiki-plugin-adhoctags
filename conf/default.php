@@ -4,4 +4,4 @@
  *
  */
 
-$conf['handleSpan'] = 1;
+$conf['inlineElements'] = "abbr,b,i,q,s,u";

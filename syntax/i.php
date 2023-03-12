@@ -12,8 +12,6 @@
 
 class syntax_plugin_adhoctags_i extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = ''; // (no empty tags!)
-    protected $entry_pattern   = '<i\b.*?>(?=.*?</i>)';
-    protected $exit_pattern    = '</i>';
-	protected $output_tag      = 'i';
+	protected $tag	= 'i';
+
 }

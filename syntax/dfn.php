@@ -12,8 +12,6 @@
 
 class syntax_plugin_adhoctags_dfn extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = ''; // (no empty tags!)
-    protected $entry_pattern   = '<dfn\b.*?>(?=.*?</dfn>)';
-    protected $exit_pattern    = '</dfn>';
-	protected $output_tag      = 'dfn';
+	protected $tag	= 'dfn';
+
 }

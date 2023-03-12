@@ -12,8 +12,6 @@
 
 class syntax_plugin_adhoctags_kbd extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = ''; // (no empty tags!)
-    protected $entry_pattern   = '<kbd\b.*?>(?=.*?</kbd>)';
-    protected $exit_pattern    = '</kbd>';
-	protected $output_tag      = 'kbd';
+	protected $tag	= 'kbd';
+
 }

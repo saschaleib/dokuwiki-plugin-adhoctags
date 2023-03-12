@@ -9,15 +9,20 @@
 
 class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
 
-    protected $special_pattern = ''; /* these ust be overwritten by the implementation */
-    protected $entry_pattern   = '';
-    protected $exit_pattern    = '';
-	protected $output_tag      = '';
-	protected $extra_attr      = array(); /* non-standard attributes allowed here */
+	protected $tag				= 'unknown';
+    protected $special_pattern	= '<%t%\b[^>\r\n]*?/>';
+    protected $entry_pattern	= '<%t%\b.*?>(?=.*?</%t%>)'; // '%t%' is the placeholder for the tag name
+    protected $exit_pattern		= '</%t%>';
+	protected $extra_attr		= array(); /* non-standard attributes allowed here */
+	protected $enabled			= false; /* will be set by the constructors of instances */
+	protected $output_tag		= null; // override the tag name for output
 
 	/* hook to override the registration process, if needed: */
 	protected function registerTag() {
-		return true;
+		
+		$arr = explode(',', $this->getConf('inlineElements'));
+		
+		return in_array($this->tag, $arr);
 	}
 
     function getType(){ return 'formatting';}
@@ -34,20 +39,22 @@ class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
      * Connect pattern to lexer
      */
     function connectTo($mode) {
+
 		if ($this->registerTag()) {
 			if ($this->special_pattern !== '') {
-				$this->Lexer->addSpecialPattern($this->special_pattern,$mode,'plugin_adhoctags_'.$this->getPluginComponent());
+				$this->Lexer->addSpecialPattern(str_replace('%t%', $this->tag, $this->special_pattern),$mode,'plugin_adhoctags_'.$this->getPluginComponent());
 			}
 			if ($this->entry_pattern !== '') {
-				$this->Lexer->addEntryPattern($this->entry_pattern,$mode,'plugin_adhoctags_'.$this->getPluginComponent());
+				$this->Lexer->addEntryPattern(str_replace('%t%', $this->tag, $this->entry_pattern),$mode,'plugin_adhoctags_'.$this->getPluginComponent());
 			}
 		}
     }
 
     function postConnect() {
+
 		if ($this->registerTag()) {
 			if ($this->exit_pattern !== '') {
-				$this->Lexer->addExitPattern($this->exit_pattern, 'plugin_adhoctags_'.$this->getPluginComponent());
+				$this->Lexer->addExitPattern(str_replace('%t%', $this->tag, $this->exit_pattern), 'plugin_adhoctags_'.$this->getPluginComponent());
 			}
 		}
     }
@@ -63,7 +70,7 @@ class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
                 return array($state, $data);
 
             case DOKU_LEXER_UNMATCHED :
-                $handler->_addCall('cdata', array($match), $pos);
+                $handler->addCall('cdata', array($match), $pos);
                 return false;
 
             case DOKU_LEXER_EXIT :
@@ -89,12 +96,12 @@ class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
                     $wrap = $this->loadHelper('adhoctags', true);
                     $attr = $wrap->buildAttributes($data, $this->extra_attr);
 
-                    $renderer->doc .= '<'.$this->output_tag.$attr.'>';
-                    if ($state == DOKU_LEXER_SPECIAL) $renderer->doc .= '</'.$this->output_tag.'>';
+                    $renderer->doc .= '<'.($this->output_tag ? $this->output_tag : $this->tag).$attr.'>';
+                    if ($state == DOKU_LEXER_SPECIAL) $renderer->doc .= '</'.($this->output_tag ? $this->output_tag : $this->tag).'>';
                     break;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</'.$this->output_tag.'>';
+                    $renderer->doc .= '</'.($this->output_tag ? $this->output_tag : $this->tag).'>';
                     break;
             }
             return true;
@@ -103,7 +110,7 @@ class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
             switch ($state) {
                 case DOKU_LEXER_ENTER:
                     $wrap = plugin_load('helper', 'adhoctags');
-                    array_push ($type_stack, $wrap->renderODTElementOpen($renderer, $this->output_tag, $data));
+                    array_push ($type_stack, $wrap->renderODTElementOpen($renderer, ($this->output_tag ? $this->output_tag : $this->tag), $data));
                     break;
 
                 case DOKU_LEXER_EXIT:

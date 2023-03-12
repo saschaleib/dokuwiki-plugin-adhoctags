@@ -12,13 +12,6 @@
 
 class syntax_plugin_adhoctags_mark extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = ''; // (no empty tags!)
-    protected $entry_pattern   = '<mark\b.*?>(?=.*?</mark>)';
-    protected $exit_pattern    = '</mark>';
-	protected $output_tag      = 'mark';
+	protected $tag	= 'mark';
 
-	/* can be disabled in the settings along with <span> (currently not active because not needed)
-	protected function registerTag() {
-		return (bool) $this->getConf('handleSpan');
-	} */
 }

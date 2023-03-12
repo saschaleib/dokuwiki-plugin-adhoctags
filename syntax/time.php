@@ -12,9 +12,7 @@
 
 class syntax_plugin_adhoctags_time extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = ''; // (no empty tags!)
-    protected $entry_pattern   = '<time\b.*?>(?=.*?</time>)';
-    protected $exit_pattern    = '</time>';
-	protected $output_tag      = 'time';
-	protected $extra_attr      = array('datetime');
+	protected $tag	= 'time';
+
+	protected $extra_attr	= array('datetime');
 }

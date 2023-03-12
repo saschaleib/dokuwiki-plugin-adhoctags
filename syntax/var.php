@@ -12,8 +12,6 @@
 
 class syntax_plugin_adhoctags_var extends syntax_plugin_adhoctags_abstractinline {
 
-    protected $special_pattern = ''; // (no empty tags!)
-    protected $entry_pattern   = '<var\b.*?>(?=.*?</var>)';
-    protected $exit_pattern    = '</var>';
-	protected $output_tag      = 'var';
+	protected $tag	= 'var';
+
 }
