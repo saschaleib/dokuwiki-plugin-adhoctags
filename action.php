@@ -119,11 +119,19 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 				),
 				array(
 					'type'		=> 'format',
+					'title'		=> $this->getLang('mark').': <𝚖>',
+					'icon'		=> '../../plugins/adhoctags/images/format-color-highlight.svg',
+					'open'		=> '<mark>',
+					'close'		=> '</mark>',
+					'sample'	=> 'marked'
+				),
+				array(
+					'type'		=> 'format',
 					'title'		=> $this->getLang('cite').': <𝚌𝚒𝚝𝚎>',
 					'icon'		=> '../../plugins/adhoctags/images/comment-quote-outline.svg',
 					'open'		=> '<cite>',
 					'close'		=> '</cite>',
-					'sample'	=> 'Citation '
+					'sample'	=> 'Citation'
 				),
 				array(
 					'type'		=> 'format',

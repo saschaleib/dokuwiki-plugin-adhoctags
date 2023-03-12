@@ -21,5 +21,4 @@ class syntax_plugin_adhoctags_span extends syntax_plugin_adhoctags_abstractinlin
 	protected function registerTag() {
 		return (bool) $this->getConf('handleSpan');
 	}
-
 }
