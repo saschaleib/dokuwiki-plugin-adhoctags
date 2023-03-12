@@ -1,6 +1,6 @@
 <?php
 /**
- * Variable  element component for the adhoctags plugin
+ * Variable element component for the adhoctags plugin
  *
  * Defines  <var> ... </var> syntax
  * More info: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var

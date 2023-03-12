@@ -15,6 +15,11 @@ class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
 	protected $output_tag      = '';
 	protected $extra_attr      = array(); /* non-standard attributes allowed here */
 
+	/* hook to override the registration process, if needed: */
+	protected function registerTag() {
+		return true;
+	}
+
     function getType(){ return 'formatting';}
     function getAllowedTypes() { return array('formatting', 'substition', 'disabled'); }
     function getPType(){ return 'normal';}
@@ -29,17 +34,21 @@ class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
      * Connect pattern to lexer
      */
     function connectTo($mode) {
-		if ($this->special_pattern !== '') {
-			$this->Lexer->addSpecialPattern($this->special_pattern,$mode,'plugin_adhoctags_'.$this->getPluginComponent());
-		}
-		if ($this->entry_pattern !== '') {
-			$this->Lexer->addEntryPattern($this->entry_pattern,$mode,'plugin_adhoctags_'.$this->getPluginComponent());
+		if ($this->registerTag()) {
+			if ($this->special_pattern !== '') {
+				$this->Lexer->addSpecialPattern($this->special_pattern,$mode,'plugin_adhoctags_'.$this->getPluginComponent());
+			}
+			if ($this->entry_pattern !== '') {
+				$this->Lexer->addEntryPattern($this->entry_pattern,$mode,'plugin_adhoctags_'.$this->getPluginComponent());
+			}
 		}
     }
 
     function postConnect() {
-		if ($this->exit_pattern !== '') {
-			$this->Lexer->addExitPattern($this->exit_pattern, 'plugin_adhoctags_'.$this->getPluginComponent());
+		if ($this->registerTag()) {
+			if ($this->exit_pattern !== '') {
+				$this->Lexer->addExitPattern($this->exit_pattern, 'plugin_adhoctags_'.$this->getPluginComponent());
+			}
 		}
     }
 
