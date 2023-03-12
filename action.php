@@ -87,7 +87,7 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 				),
 				array(
 					'type'		=> 'format',
-					'title'		=> $this->getLang('def').': <𝚍𝚏𝚗>',
+					'title'		=> $this->getLang('dfn').': <𝚍𝚏𝚗>',
 					'icon'		=> '../../plugins/adhoctags/images/def.svg',
 					'open'		=> '<dfn>',
 					'close'		=> '</dfn>',
@@ -119,7 +119,7 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 				),
 				array(
 					'type'		=> 'format',
-					'title'		=> $this->getLang('mark').': <𝚖>',
+					'title'		=> $this->getLang('mark').': <𝚖𝚊𝚛𝚔>',
 					'icon'		=> '../../plugins/adhoctags/images/format-color-highlight.svg',
 					'open'		=> '<mark>',
 					'close'		=> '</mark>',
