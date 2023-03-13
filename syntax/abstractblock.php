@@ -7,12 +7,12 @@
  * @author     Sascha Leib <sascha.leib(at)kolmio.com>
  */
 
-class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_adhoctags_abstractblock extends DokuWiki_Syntax_Plugin {
 
-	protected $tag				= 'unknown';
-    protected $special_pattern	= '<%t%\b[^>\r\n]*?/>';
-    protected $entry_pattern	= '<%t%\b.*?>(?=.*?</%t%>)'; // '%t%' is the placeholder for the tag name
-    protected $exit_pattern		= '</%t%>';
+	protected $tag				= null;
+    protected $special_pattern = '<%t%\b[^>\r\n]*?/>';
+    protected $entry_pattern   = '<%t%\b.*?>(?=.*?</%t%>)';
+    protected $exit_pattern    = '</%t%>';
 	protected $extra_attr		= array(); /* non-standard attributes allowed here */
 	protected $enabled			= false; /* will be set by the constructors of instances */
 	protected $output_tag		= null; // override the tag name for output
@@ -20,15 +20,17 @@ class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
 	/* hook to override the registration process, if needed: */
 	protected function registerTag() {
 		
-		$arr = explode(',', $this->getConf('inlineElements'));
+		// $arr = explode(',', $this->getConf('inlineElements'));
 		
-		return in_array($this->tag, $arr);
+		return (bool) $this->tag; //in_array($this->tag, $arr);
 	}
 
     function getType(){ return 'formatting';}
-    function getAllowedTypes() { return array('formatting', 'substition', 'disabled'); }
-    function getPType(){ return 'normal';}
-    function getSort(){ return 196; }
+    function getAllowedTypes() {
+		return array('container', 'formatting', 'substition', 'protected', 'disabled', 'paragraphs');
+	}
+    function getPType(){ return 'stack';}
+    function getSort(){ return 195; }
     // override default accepts() method to allow nesting - ie, to get the plugin accepts its own entry syntax
     function accepts($mode) {
         if ($mode == substr(get_class($this), 7)) return true;
@@ -63,17 +65,44 @@ class syntax_plugin_adhoctags_abstractinline extends DokuWiki_Syntax_Plugin {
      * Handle the match
      */
     function handle($match, $state, $pos, Doku_Handler $handler){
+        global $conf;
         switch ($state) {
             case DOKU_LEXER_ENTER:
             case DOKU_LEXER_SPECIAL:
+			
                 $data = trim(substr($match,strpos($match,' '),-1)," \t\n/");
                 return array($state, $data);
 
             case DOKU_LEXER_UNMATCHED :
+
+				if (substr($match, 0, 2) == '==') { // it's a headline
+					$title = trim($match);
+					$level = max(7 - strspn($title,'='), 1);
+					$title = trim($title,'= ');
+
+					$handler->_addCall('header',array($title,$level,$pos), $pos);
+					// close the section edit the header could open
+					if ($title && $level <= $conf['maxseclevel']) {
+						$handler->addPluginCall('wrap_closesection', array(), DOKU_LEXER_SPECIAL, $pos, '');
+					}
+					break;
+
+				}
+			
                 $handler->addCall('cdata', array($match), $pos);
                 return false;
 
+            case DOKU_LEXER_MATCHED:
+                // we have a == header ==, use the core header() renderer
+                // (copied from core header() in inc/parser/handler.php)
+				
+				dbg('DOKU_LEXER_MATCHED: ' . $match);
+
+                break;
+
+
             case DOKU_LEXER_EXIT :
+
                 return array($state, '');
 
         }

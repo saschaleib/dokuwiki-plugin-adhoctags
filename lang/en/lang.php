@@ -1,6 +1,6 @@
 <?php
 
-$lang['picker']    = 'Inline HTML Tags';
+$lang['picker']    = 'Ad-Hoc Tags';
 
 $lang['b']		= 'Bring attention to (bold)';
 $lang['i']		= 'Idiomatic text (italic)';
@@ -16,3 +16,10 @@ $lang['samp']	= 'Sample output';
 $lang['var']	= 'Variable';
 $lang['mark']	= 'Marked text';
 $lang['time']	= 'Date/Time';
+
+$lang['figure']		= 'Figure + Caption';
+$lang['article']	= 'Article block';
+$lang['section']	= 'Generic section';
+$lang['aside']		= 'Aside block';
+$lang['address']	= 'Contact address';
+$lang['details']	= 'Details + Summary';

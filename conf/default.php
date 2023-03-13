@@ -4,4 +4,5 @@
  *
  */
 
-$conf['inlineElements'] = "abbr,b,i,q,s,u";
+$conf['inlineElements'] = 'abbr,b,i,mark,q,s,time,u';
+$conf['blockElements'] = 'article,section,aside,figure';

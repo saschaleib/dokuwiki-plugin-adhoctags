@@ -1,6 +1,6 @@
 <?php
 
-$lang['picker']    = 'Inline HTML-Tags';
+$lang['picker']    = 'Ad-Hoc Tags';
 
 $lang['b']		= 'Aufmerksamkeit (fettdruck)';
 $lang['i']		= 'Idiomatisch (kursiv)';
@@ -16,3 +16,10 @@ $lang['samp']	= 'Ausgabebeispiel';
 $lang['var']	= 'Variable';
 $lang['mark']	= 'Textmarker';
 $lang['time']	= 'Datum/Uhrzeit';
+
+$lang['figure']		= 'Abbildung + Bildunterschrift';
+$lang['article']	= 'Artikelblock';
+$lang['section']	= 'Thematische Gruppe';
+$lang['aside']		= 'Nachgeordnete Inhalte';
+$lang['address']	= 'Kontaktadresse';
+$lang['details']	= 'Details + Zusammenfassung';

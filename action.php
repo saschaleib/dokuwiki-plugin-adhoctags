@@ -29,6 +29,7 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 			'icon'	=>	'../../plugins/adhoctags/images/code-tags.svg',
 			'id'	=>	'tbbtn_adhoctagsInline',
 			'list'	=>	array(
+				/* inline elements */
 				array(
 					'type'		=> 'format',
 					'title'		=> $this->getLang('b').': <𝚋>',
@@ -140,18 +141,58 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 					'open'		=> '<time>',
 					'close'		=> '</time>',
 					'sample'	=> 'datetime'
+				),
+				/* block-level elements: */
+				array(
+					'type'		=> 'format',
+					'title'		=> $this->getLang('section').': <𝚜𝚎𝚌𝚝𝚒𝚘𝚗>',
+					'icon'		=> '../../plugins/adhoctags/images/code-brackets.svg',
+					'open'		=> '<section>\n',
+					'close'		=> '\n</section>',
+					'sample'	=> 'Section'
+				),
+				array(
+					'type'		=> 'format',
+					'title'		=> $this->getLang('figure').': <𝚏𝚒𝚐𝚞𝚛𝚎>/<𝚏𝚒𝚐𝚌𝚊𝚙𝚝𝚒𝚘𝚗>',
+					'icon'		=> '../../plugins/adhoctags/images/figure-caption.svg',
+					'open'		=> '<figure>\n',
+					'close'		=> '\n<figcaption>Caption</figcaption>\n</figure>',
+					'sample'	=> 'figure content'
+				),
+				array(
+					'type'		=> 'format',
+					'title'		=> $this->getLang('aside').': <𝚊𝚜𝚒𝚍𝚎>',
+					'icon'		=> '../../plugins/adhoctags/images/aside.svg',
+					'open'		=> '<aside>\n',
+					'close'		=> '\n</aside>',
+					'sample'	=> 'Aside text'
+				),
+				array(
+					'type'		=> 'format',
+					'title'		=> $this->getLang('article').': <𝚊𝚛𝚝𝚒𝚌𝚕𝚎>',
+					'icon'		=> '../../plugins/adhoctags/images/subtitles-outline.svg',
+					'open'		=> '<article>\n',
+					'close'		=> '\n</article>',
+					'sample'	=> 'Article text'
+				),
+				array(
+					'type'		=> 'format',
+					'title'		=> $this->getLang('address').': <𝚊𝚍𝚍𝚛𝚎𝚜𝚜>',
+					'icon'		=> '../../plugins/adhoctags/images/card-account-details-outline.svg',
+					'open'		=> '<address>\n',
+					'close'		=> '\n</address>',
+					'sample'	=> 'Address'
+				),
+				array(
+					'type'		=> 'format',
+					'title'		=> $this->getLang('details').': <𝚍𝚎𝚝𝚊𝚒𝚕𝚜>/<𝚜𝚞𝚖𝚖𝚊𝚛𝚢>',
+					'icon'		=> '../../plugins/adhoctags/images/details-summary.svg',
+					'open'		=> '<details><summary>',
+					'close'		=> '</summary>\nDetails\n</details>',
+					'sample'	=> 'Summary'
 				)
 			)
 		);
-		/* $event->data[] = array (  //<𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚎𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣>
-			'type'	=>	'picker',
-			'title'	=>	"Block elements",
-			'icon'	=>	'../../plugins/adhoctags/images/code-brackets.svg',
-			'id'	=>	'tbbtn_adhoctagsBlock',
-			'list'	=>	array(
-				// TODO!
-			)
-		); */
 	}
 }
 

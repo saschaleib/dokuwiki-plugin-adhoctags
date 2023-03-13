@@ -69,9 +69,14 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
             'class' => null,
             'width' => null,
             'id' => null,
-            'dir' => null
+			'title' => null,
+            'dir' => null,
+			'datetime' => null
         );
-        $tokens = preg_split('/\s+/', $data, 9);
+        //$tokens = preg_split('/\s+/', $data, 9);
+        $tokens = preg_split('/(?: +|(=))(?=(?:[^"]*"[^"]*")*[^"]*$)/', $data, -1, PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE);
+		
+		//dbg("Tokens: [\r\n\t'" . implode("'\r\n\t'", $tokens) . "'\r\n]");		
 
         // anonymous function to convert inclusive comma separated items to regex pattern
         $pattern = function ($csv) {
@@ -108,6 +113,12 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
             //get id
             if (preg_match('/#([A-Za-z0-9_-]+)/', $token)) {
                 $attr['id'] = trim($token,'#');
+                continue;
+            }
+
+			// get title
+            if (preg_match('/\"(.*)\"/', $token)) {
+                $attr['title'] = trim($token,'"');
                 continue;
             }
 
@@ -177,6 +188,12 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
             if($attr['id']) {
 				$out .= ' id="'.hsc($attr['id']).'"';
 			}
+
+			/* new: title attribute is simply a quoted string */
+            if($attr['title']) {
+				$out .= ' title="'.hsc($attr['title']).'"';
+			}
+
             // width on spans normally doesn't make much sense, but in the case of floating elements it could be used
             if($attr['width']) {
                 if (strpos($attr['width'],'%') !== false) {
@@ -197,7 +214,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 			}
 
 			// the attribute 'datetime' is only valid for specific tags:
-            if(array_key_exists('datetime', $attr)) { 
+            if($attr['datetime']) {
 				$out .= ' datetime="'.$attr['datetime'].'"';
 			}
 
