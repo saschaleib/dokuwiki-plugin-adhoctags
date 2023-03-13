@@ -21,6 +21,8 @@ Instead of specifying the attributes in the HTML format, this plugin uses the fo
 
   Note: this will also set the HTML `dir` attribute: either by setting a language code that has a default RTL script, or by appending a script tag that refers to a RTL script (e.g. `Arab` or `Hebr`).
   
+- `"Title text"` – A string that is enclosed in double quotes will be rendered as `title`.
+  
 - `&datetime` – an ampersand (`&`), followed by a valid date and/or time, or period specification. Examples: `&2022-12-24T18:00` ([more examples](https://www.w3schools.com/Tags/att_time_datetime.asp)).
 
   Note: This attribute is only valid for `<time>` elements.
@@ -28,7 +30,6 @@ Instead of specifying the attributes in the HTML format, this plugin uses the fo
   Note2: for technical reasons, there can be no spaces in this attribute. Please use one of the formats that do not include a space.
   
 - `classname` – anything that does not match the criteria above will be treated as a class name.
-
 
 Generally, attributes can appear in any order are always optional!
 
@@ -62,7 +63,7 @@ Inline elements can appear inside a paragraph or other running text.
 
 - `<small>` — “[Side content](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small)” (smaller)
 
-- `<span>` — “[Content span](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)” (this element can be disabled in the settings, in order to maintain compatibility with the Wrap plugin)
+- `<span>` — “[Content span](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)”
 
 - `<time>` – “[Date/Time](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time)”
 
@@ -72,7 +73,25 @@ Inline elements can appear inside a paragraph or other running text.
 
 ### 1. Block-level elements
 
-There are currently no block-level elements defined. These are however planned for the near future.
+The following block-level elements are supported:
+
+- `<article>` – “[Article](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article)”
+
+- `<section>` – “[Section](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section)”
+
+- `<aside>` – “[Aside](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)”
+
+- `<address>` – “[Address](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address)”
+
+- `<details>` – “[Details](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)”
+
+- `<summary>` – “[Summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary)”
+
+- `<figure>` – “[Figure](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure)”
+
+- `<figcaption>` – “[Figure caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption)”
+
+- `<div>` – “[Generic block](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)”
 
 ## Work in Progress
 
