@@ -14,4 +14,6 @@ class syntax_plugin_adhoctags_summary extends syntax_plugin_adhoctags_abstractbl
 
 	protected $tag	= 'summary';
 
+    function getPType(){ return 'block';}
+
 }

@@ -14,4 +14,6 @@ class syntax_plugin_adhoctags_figcaption extends syntax_plugin_adhoctags_abstrac
 
 	protected $tag	= 'figcaption';
 
+    function getPType(){ return 'block';}
+
 }
