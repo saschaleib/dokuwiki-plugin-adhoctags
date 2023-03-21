@@ -10,10 +10,8 @@
  * @author     Sascha Leib <sascha.leib(at)kolmio.com>
  */
 
-class syntax_plugin_adhoctags_figcaption extends syntax_plugin_adhoctags_abstractblock {
+class syntax_plugin_adhoctags_figcaption extends syntax_plugin_adhoctags_abstractheadline {
 
 	protected $tag	= 'figcaption';
-
-    function getPType(){ return 'block';}
 
 }

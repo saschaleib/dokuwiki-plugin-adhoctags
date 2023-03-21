@@ -14,4 +14,5 @@ class syntax_plugin_adhoctags_bdi extends syntax_plugin_adhoctags_abstractinline
 
 	protected $tag	= 'bdi';
 
+	protected $extra_attr	= array('dir');
 }

@@ -14,4 +14,5 @@ class syntax_plugin_adhoctags_bdo extends syntax_plugin_adhoctags_abstractinline
 
 	protected $tag	= 'bdo';
 
+	protected $extra_attr	= array('dir');
 }
