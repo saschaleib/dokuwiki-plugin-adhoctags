@@ -23,7 +23,7 @@ Instead of specifying the attributes in the HTML format, this plugin uses the fo
   
 - `"Title text"` – A string that is enclosed in double quotes will be rendered as `title`.
   
-- `&datetime` – an ampersand (`&`), followed by a valid date and/or time, or period specification. Examples: `&2022-12-24T18:00` ([more examples](https://www.w3schools.com/Tags/att_time_datetime.asp)).
+- Testing: `&datetime` – an ampersand (`&`), followed by a valid date and/or time, or period specification. Examples: `&2022-12-24T18:00` ([more examples](https://www.w3schools.com/Tags/att_time_datetime.asp)). (note: this might be changed in one of the comming releases).
 
   Note: This attribute is only valid for `<time>` elements.
 
@@ -44,6 +44,8 @@ Inline elements can appear inside a paragraph or other running text.
 - `<abbr>` – “[Abbreviation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr)”
 
 - `<b>` – “[Bring Attention To](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/b)” (also known as “bold”)
+
+- `<bdi>` – “[Bidirectional Isolate](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bdi)” and `<bdo>` – “[Bidirectional Text Override](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bdo)” 
 
 - `<cite>` – “[Citation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite)”
 
@@ -83,13 +85,11 @@ The following block-level elements are supported:
 
 - `<address>` – “[Address](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address)”
 
-- `<details>` – “[Details](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)”
+- `<details>` – “[Details](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)” and `<summary>` – “[Summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary)”
 
-- `<summary>` – “[Summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary)”
+- `<figure>` – “[Figure](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure)” and `<figcaption>` – “[Figure caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption)”
 
-- `<figure>` – “[Figure](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure)”
-
-- `<figcaption>` – “[Figure caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption)”
+- `<h1>` … `<h6>` – “[Section Heading Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)”
 
 - `<div>` – “[Generic block](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)”
 
