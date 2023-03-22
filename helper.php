@@ -2,18 +2,12 @@
 /**
  * Helper Component for the Wrap Plugin
  *
- * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Anika Henke <anika@selfthinker.org>
- * @author     Sascha Leib <sascha.leib(at)kolmio.com>
+ * @license	GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ * @author	 Anika Henke <anika@selfthinker.org>
+ * @author	 Sascha Leib <sascha.leib(at)kolmio.com>
  */
 
 class helper_plugin_adhoctags extends DokuWiki_Plugin {
-    static protected $boxes = array ('wrap_box', 'wrap_danger', 'wrap_warning', 'wrap_caution',
-									 'wrap_notice', 'wrap_safety', 'wrap_info', 'wrap_important',
-									 'wrap_alert', 'wrap_tip', 'wrap_help', 'wrap_todo',
-									 'wrap_download', 'wrap_hi', 'wrap_spoiler');
-    static protected $paragraphs = array ('wrap_leftalign', 'wrap_rightalign', 'wrap_centeralign',
-									 'wrap_justify');
 
 	/* list of languages which normally use RTL scripts */
 	static protected $rtllangs = array('ar','dv','fa','ha','he','ks','ku','ps','ur','yi','arc');
@@ -22,30 +16,15 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 	/* selection of left-to-right scripts (may override the language defaults to ltr) */
 	static protected $ltrscripts = array('latn','cyrl','grek','cyrs','armn');
 
-    static $box_left_pos = 0;
-    static $box_right_pos = 0;
-    static $box_first = true;
-    static $table_entr = 0;
-
-    protected $column_count = 0;
-
 	/* Helper plugins should return info about the methods supported. */
 	public function getMethods() {
 		$result = array();
 		$result[] = array(
-			'name' => 'getAttributes',
-			'desc' => 'parses the tag attributes',
-			'params' => array(
-				'data' => 'string',
-				'useNoPrefix (optional)' => 'boolean'
-			),
-			'return' => array('attributes' => 'array')
-		);
-		$result[] = array(
-				'name' => 'buildAttributes',
+			'name' => 'buildAttributes',
 			'desc' => 'writes out element attributes',
 			'params' => array(
 				'data' => 'string',
+				'custom' => 'array',
 				'addClass (optional)' => 'string',
 				'mode (optional)' => 'string'
 			),
@@ -54,105 +33,157 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 		return $result;
 	}
 
-    /**
-     * get attributes (pull apart the string between '<wrap' and '>')
-     *  and identify classes, width, lang and dir
-     *
-     * @author Anika Henke <anika@selfthinker.org>
-     * @author Christopher Smith <chris@jalakai.co.uk>
-     *   (parts taken from http://www.dokuwiki.org/plugin:box)
-     */
-    function getAttributes($data, $custom, $useNoPrefix=true) {
+	/**
+	 * build attributes (write out classes, width, lang and dir)
+	 */
+	function buildAttributes($data, $custom, $addClass='', $mode='xhtml') {
 
-        $attr = array(
-            'lang' => null,
-            'class' => null,
-            'width' => null,
-            'id' => null,
-			'title' => null,
-            'dir' => null,
-			'datetime' => null
-        );
-        //$tokens = preg_split('/\s+/', $data, 9);
-        $tokens = preg_split('/(?: +|(=))(?=(?:[^"]*"[^"]*")*[^"]*$)/', $data, -1, PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE);
+		$attList = $this->getAttributes($data, $custom);
+		$out = '';
 		
-		//dbg("Tokens: [\r\n\t'" . implode("'\r\n\t'", $tokens) . "'\r\n]");		
+		//dbg('attList=' . print_r($attList, true));
 
-        // anonymous function to convert inclusive comma separated items to regex pattern
-        $pattern = function ($csv) {
-            return '/^(?:'. str_replace(['?','*',' ',','],
-                                        ['.','.*','','|'], $csv) .')$/';
-        };
+		if ($mode=='xhtml') {
+			
+			foreach($attList as $key => $val) {
+				
+				switch ($key) {
 
-        // noPrefix: comma separated class names that should be excluded from
-        //   being prefixed with "wrap_",
-        //   each item may contain wildcard (*, ?)
-        /* ($this->getConf('noPrefix') && $useNoPrefix) ? $pattern($this->getConf('noPrefix')) : ''; */
+					/* common HTML attributes (always enabled) */
 
-        // restrictedClasses : comma separated class names that should be checked
-        //   based on restriction type (whitelist or blacklist),
-        //   each item may contain wildcard (*, ?)
-        /*$restrictedClasses = ($this->getConf('restrictedClasses')) ?
-                            $pattern($this->getConf('restrictedClasses')) : '';
-        $restrictionType = $this->getConf('restrictionType'); */
+					case 'id':			/* id */
+					case 'title':		/* title */
+					case 'style':		/* style */
+					case 'lang':		/* language */
+					case 'dir':			/* direction */
+					case 'tabindex':	/* tabindex */
+					case 'is':			/* is */
+						$out .= ' '.$key.'="'.$val.'"';
+						break;
 
-        foreach ($tokens as $token) {
+					case 'class':		/* custom classes */
+						if (trim($val) !== '') {
+							$out .= ' '.$key.'="'.hsc($val).' '.$addClass.'"';
+						}
+						break;
 
-            //get width
-            if (preg_match('/^\d*\.?\d+(%|px|em|rem|ex|ch|vw|vh|pt|pc|cm|mm|in)$/', $token)) {
-                $attr['width'] = $token;
-                continue;
-            }
+					case 'hidden':		/* hidden */
+						$out .= ' '.$key . ( is_null($val) ? '' : '="'.hsc($val).'"' );
+						break;
 
-            //get lang
-            if (preg_match('/:([a-z\-]+)/', $token)) {
-                $attr['lang'] = trim($token,':');
-                continue;
-            }
+					case 'width':	/* custom width (deprecated, not compatible with 'style'!)*/
+						if(!isset($attList['style'])) {
+							if (strpos($val,'%') !== false) {
+								$out .= ' style="width: '.hsc($val).';"';
+							} else {
+								// anything but % should be 100% when the screen gets smaller
+								$out .= ' style="width: '.hsc($val).'; max-width: 100%;"';
+							}
+						}
+						break;
 
-            //get id
-            if (preg_match('/#([A-Za-z0-9_-]+)/', $token)) {
-                $attr['id'] = trim($token,'#');
-                continue;
-            }
+					/* specific HTML attributes (only allowed in certain contexts) */
+					case 'datetime':		/* datetime attribute (only for <time> elements) */
+					case 'rel':				/* link rel */
+					case 'target':			/* link target */
+					case 'hreflang':		/* link language */
+						if (in_array($key, $custom)) {
+							$out .= ' '.$key.'="'.hsc($val).'"';
+						}
+						break;
+						
+					case 'href':			/* link URL */
+						if ($this->getConf('allowJSLinks') == '0'
+						 && substr($val, 0, 11) === 'javascript:') {
+							 break;
+						} elseif (in_array($key, $custom)) {
+							$out .= ' '.$key.'="'.hsc($val).'"';
+						}
+						break;
 
-			// get title
-            if (preg_match('/\"(.*)\"/', $token)) {
-                $attr['title'] = trim($token,'"');
-                continue;
-            }
+					case 'open':		/* open switch attribute (only for <details>) */
+						if (in_array($key, $custom)) {
+							$out .= ' '.$key . ( is_null($val) ? '' : '="'.hsc($val).'"' );
+						}
+						break;
+						
+					default:
+						dbg('Unknown attribute: ' . $key);
+				}
+			}
 
-			/* custom attributes */
-			//find datetime 
-            if (in_array('datetime', $custom) && preg_match('/\&([A-Za-z0-9\-\+\:\.]+)/', $token)) {
+			// special case: no class name specified, but there is one passed down from a plugin:
+			if($addClass !== '' && !isset($attr['class'])) {
+				$out .= ' class="'.$addClass.'"';
+			}
+			
+		}
 
-				$attr['datetime'] = strtoupper(substr($token,1));
-				//dbg('datetime: ' . $attr['datetime']));
+		return $out;
+	}
+
+	/**
+	 * get attributes (pull apart the string between '<wrap' and '>')
+	 *  and identify classes, width, lang and dir
+	 *
+	 * @author Anika Henke <anika@selfthinker.org>
+	 * @author Christopher Smith <chris@jalakai.co.uk>
+	 *   (parts taken from http://www.dokuwiki.org/plugin:box)
+	 */
+	function getAttributes($data, $custom, $useNoPrefix=true) {
+
+		//dbg('getAttributes("$data="' . $data . '",  $custom=' . print_r($custom, true));
+
+		// store the attributes here:
+		$attr = array();
+		// split up the attributes string (keep quoted and square brackets intact):
+		$tokens = preg_split('/(\[[^\]]*[^\/]\])/i', $data, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+
+		foreach ($tokens as $token) {
+
+			//get width (depracated, may be removed later!)
+			if (preg_match('/^\d*\.?\d+(%|px|em|rem|ex|ch|vw|vh|pt|pc|cm|mm|in)$/', $token)) {
+				$attr['width'] = $token;
 				continue;
 			}
 
-            //get classes
-            //restrict token (class names) characters to prevent any malicious data
-            if (preg_match('/[^A-Za-z0-9_-]/',$token)) continue;
-            /*if ($restrictedClasses) {
-                $classIsInList = preg_match($restrictedClasses, $token);
-                // either allow only certain classes or disallow certain classes
-                if ($restrictionType xor $classIsInList) continue;
-            } */
-            // prefix adjustment of class name
-            $prefix = ''; //(preg_match($noPrefix, $token)) ? '' : 'wrap_';
-            $attr['class'] = (isset($attr['class']) ? $attr['class'].' ' : '').$prefix.$token;
+			//get language attribute
+			if (preg_match('/^:([a-z\-]+)/', $token)) {
+				$attr['lang'] = trim($token,':');
+				continue;
+			}
 
-        }
-        /*if ($this->getConf('darkTpl')) {
-            $attr['class'] = (isset($attr['class']) ? $attr['class'].' ' : '').'wrap__dark';
-        }*/
-        /*if ($this->getConf('emulatedHeadings')) {
-            $attr['class'] = (isset($attr['class']) ? $attr['class'].' ' : '').'wrap__emuhead';
-        }*/
+			//get id (IDs can not start with a number!)
+			if (preg_match('/^#([A-Za-z]\w+)/', $token)) {
+				$attr['id'] = trim($token,'#');
+				continue;
+			}
 
-         /* improved RTL detection to make sure it covers more cases: */
-		if($attr['lang'] && $attr['lang'] !== '') {
+			// get title (any quoted string)
+			if (preg_match('/^\"(.*)\"$/', $token)) {
+				$attr['title'] = trim($token,'"');
+				continue;
+			}
+
+			/* custom attributes */
+			if (preg_match('/^\[([^\]]+)\]$/', $token)) {
+				
+				$cAttr = $this->parseCustomAttribute(trim($token,'[]'));
+				//dbg('$token = ' . $token . ', $cAttr = ' . print_r($cAttr, true));
+				if ($cAttr) {
+					$attr[$cAttr[0]] = ( isset($cAttr[1]) ? $cAttr[1] : null );
+				}
+				continue;
+			}
+
+			//add to list of classes if it matches the pattern for class names:
+			if (preg_match('/^[\w\d\-\\_]*$/',$token)) {
+				$attr['class'] = (isset($attr['class']) ? $attr['class'].' ' : '') . $token;
+			}
+		}
+
+		 /* improved RTL detection to make sure it covers more cases: */
+		if(!array_key_exists('dir', $attr) && array_key_exists('lang', $attr) && $attr['lang'] !== '') {
 
 			// turn the language code into an array of components:
 			$arr = explode('-', $attr['lang']);
@@ -166,62 +197,104 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 			$attr['dir'] = ( $rtl ? 'rtl' : 'ltr' );
 		}
 
-        return $attr;
-    }
+		return $attr;
+	}
 
-    /**
-     * build attributes (write out classes, width, lang and dir)
-     */
-    function buildAttributes($data, $custom, $addClass='', $mode='xhtml') {
+	/**
+	 * Parse custom attributes into key-value pairs
+	 *
+	 * @author Sascha Leib <sascha.leib(at)kolmio.com>
+	 */
+	function parseCustomAttribute($token) {
+		global $conf;
 
-        $attr = $this->getAttributes($data, $custom);
-        $out = '';
+		$kvp = explode('=', $token, 2);
+		//dbg('$kvp = ' . print_r($kvp, true));
+		
+		$r = null; // return value
+		if ($kvp && count($kvp) > 0) {
+			
+			$kvp[0] = strtolower($kvp[0]); // always use lowercase name!
+			$val = ( count($kvp) > 1 ? $kvp[1] : $kvp[0] );
 
-        if ($mode=='xhtml') {
-            if($attr['class']) {
-				$out .= ' class="'.hsc($attr['class']).' '.$addClass.'"';
+			// only explicitely allowed attribute names are passed on:
+			switch ($kvp[0]) {
+			case 'datetime': // datetime (for <time> only)
+				if (preg_match('/^[\w\d\s_+-:]+$/i', $val)) {
+					$r = $kvp;
+				}
+				break;
+			case 'dir': // direction override
+				if (in_array($val, array('auto', 'rtl', 'ltr'))) {
+					$r = $kvp;
+				}
+				break;
+			case 'hidden': // hidden element
+				if (count($kvp) == 1 || in_array($val, array('', 'hidden', 'until-found'))) {
+					$r = $kvp;
+				}
+				break;
+			case 'href': // links in <a> elements
+				if (preg_match('/^[\w\.:;%#~@\/\(\)\']+$/i', $val)) {
+					$r = $kvp;
+				}
+				break;
+			case 'rel': // rel in <a> elements
+				if (preg_match('/^[\w\d\-_]+$/i', $val)) {
+					$r = $kvp;
+				}
+				break;
+			case 'hreflang': // link language in <a> elements
+				if (preg_match('/^[\w\-]+$/i', $val)) {
+					$r = $kvp;
+				}
+				break;
+			case 'is': // custom elements
+				if (preg_match('/^[a-z]+\-\w+$/i', $val)) {
+					$r = $kvp;
+				}
+				break;
+			case 'open': // disclosure only
+				if (count($kvp) == 1 || in_array($val, array('','open'))) {
+					$r = $kvp;
+				}
+				break;
+			case 'role': // ARIA Role
+				if (preg_match('/^\w+$/', $val)) {
+					$r = $kvp;
+				}
+				break;
+			case 'style': // style attribute (experimental, not compatible with 'width'!)
+				if ($this->getConf('allowStyle') == '1'
+				 && preg_match('/^[\w\-\_\'#\;\:\.\(\)]+$/', $val)) {
+					$r = $kvp;
+				}
+				break;
+			case 'tabindex': // tabindex must be integer
+				if (filter_var($val, FILTER_VALIDATE_INT)) {
+					$r = $kvp;
+				}
+				break;
+				
+			case 'itemid': // embedded microdata attributes (simplified check, not fully implemented yet)
+			case 'itemprop':
+			case 'itemref':
+			case 'itemscope': // may be empty
+			case 'itemtype':
+				if (count($kvp) == 1 || preg_match('/^[\w:%~/]+$/', $val)) {
+					$r = $kvp;
+				}
+				break;
+				
+			default: // one more special case:
+				
+				if (preg_match('/^data-[\w]+$/i', $kvp[0])) {  // data-* attributes
+					$r = $kvp;
+				}
 			}
-            // if used in other plugins, they might want to add their own class(es)
-            elseif($addClass) {
-				$out .= ' class="'.$addClass.'"';
-			}
-            if($attr['id']) {
-				$out .= ' id="'.hsc($attr['id']).'"';
-			}
+		}
+		return $r;
+	}
 
-			/* new: title attribute is simply a quoted string */
-            if($attr['title']) {
-				$out .= ' title="'.hsc($attr['title']).'"';
-			}
-
-            // width on spans normally doesn't make much sense, but in the case of floating elements it could be used
-            if($attr['width']) {
-                if (strpos($attr['width'],'%') !== false) {
-                    $out .= ' style="width: '.hsc($attr['width']).';"';
-                } else {
-                    // anything but % should be 100% when the screen gets smaller
-                    $out .= ' style="width: '.hsc($attr['width']).'; max-width: 100%;"';
-                }
-            }
-            // write out the language and direction attribute:
-			// (xml:lang is no longer required in HTML5)
-            if($attr['lang']) {
-				$out .= ' lang="'.$attr['lang'].'"';
-			}
-			// dir should be separated from lang:
-            if($attr['dir']) {
-				$out .= ' dir="'.$attr['dir'].'"';
-			}
-
-			// the attribute 'datetime' is only valid for specific tags:
-            if($attr['datetime']) {
-				$out .= ' datetime="'.$attr['datetime'].'"';
-			}
-
-        }
-
-        return $out;
-    }
-	
-	/* ODT Functions removed */
+	/* Does anyone really need ODT ? */
 }

@@ -4,5 +4,6 @@
  *
  */
 
-$conf['inlineElements'] = 'abbr,b,i,mark,q,s,time,u';
-$conf['blockElements'] = 'section,aside,figure,figcaption';
+$conf['allowedElements'] = 'abbr,aside,b,figure,figcaption,i,mark,q,s,section,u';
+$conf['allowStyle'] = 0;
+$conf['allowJSLinks'] = 0;

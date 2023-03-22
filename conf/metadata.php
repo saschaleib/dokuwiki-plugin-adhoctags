@@ -4,6 +4,8 @@
  *
  */
 
-$meta['inlineElements'] = array('multicheckbox', '_choices' => array('b','var','i','dfn','s','kbd','u','samp','q','bdi','abbr','bdo','mark','cite','time','small','strong','em','span'));
+$meta['allowedElements'] = array('multicheckbox', '_choices' => array('b','aside','i','section','s','figure','u','figcaption','q','article','abbr','address','mark','cite','strong','small','em','time','h1','dfn','h2','kbd','h3','samp','h4','var','h5','bdi','h6','bdo','a','details','summary','span','div'));
 
-$meta['blockElements'] = array('multicheckbox', '_choices' => array('section','h1','aside','h2','figure','h3','figcaption','h4','address','h5','article','h6','summary','details','div'));
+$meta['attributes'] = array('fieldset');
+$meta['allowStyle'] = array('onoff');
+$meta['allowJSLinks'] = array('onoff');
