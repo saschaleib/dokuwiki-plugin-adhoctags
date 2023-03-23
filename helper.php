@@ -137,7 +137,9 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 		// store the attributes here:
 		$attr = array();
 		// split up the attributes string (keep quoted and square brackets intact):
-		$tokens = preg_split('/(\[[^\]]*[^\/]\])/i', $data, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+		$tokens = $this->tokenizeAttr($data);
+		
+		dbg('$tokens = ' . print_r($tokens, true));
 
 		foreach ($tokens as $token) {
 
@@ -295,6 +297,118 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 		}
 		return $r;
 	}
+
+	/**
+	 * Split the input data into suitable tokens
+	 *
+	 * @author Sascha Leib <sascha.leib(at)kolmio.com>
+	 */
+	 function tokenizeAttr($data) {
+		 
+		// key characters:
+		define('SPACECHAR', ' ');
+		define('QUOTECHAR', '"');
+		define('BRACHAR',   '[');
+		define('KETCHAR',   ']');
+		define('ESCAPECHAR','\\');
+
+		// this parser is a simple state-machine:
+		define('NEITHER',   0);
+		define('INQUOT',    1);
+		define('INBRACKET', 2);
+
+		$result = array();
+		$token = ''; // temporary storage of each item
+		$escaped = false; // should the next character be treated "as is"?
+		$state = NEITHER; // parser state
+
+		// loop over all characters:
+		forEach(str_split($data) as $c) {
+			
+			switch($c) {
+			 case SPACECHAR: // _
+			
+				if (!$escaped && $state == NEITHER) {
+					if (trim($token)!==''){array_push($result, $token);}
+					$token = '';
+				} else {
+					$token = $token . $c;
+					$escaped = false;
+				}
+				break;
+
+			 case QUOTECHAR: // "
+				
+				switch ($state) {
+				 case NEITHER:
+					if (trim($token)!==''){array_push($result, $token);}
+					$state = INQUOT;
+					$token = $c;
+					break;
+					
+				 case INQUOT:
+					$token .= $c;
+					array_push($result, $token);
+					$state = NEITHER;
+					$token = '';
+					break;
+			
+				 case INBRACKET:
+					$token .= $c;
+					break;
+			
+				 default:
+					// should never happen!
+				}
+				break;
+				
+				
+			 case BRACHAR: // [
+
+				if (!$escaped && $state == NEITHER) {
+					
+					if (trim($token)!==''){array_push($result, $token);}
+					$token = $c;
+					$state = INBRACKET;				
+				
+				} else {
+					$token .= $c;
+				}
+				break;
+
+			 case KETCHAR: // ]
+			
+				if (!$escaped && $state == INBRACKET) {
+					
+					$token .= $c;
+					array_push($result, $token);
+					$token = '';
+					$state = NEITHER;
+					
+				} else {
+					$token .= $c;
+				}
+				break;
+
+			 case ESCAPECHAR: // \
+			
+				if (!$escaped) {
+					// next character is escaped:
+					$escaped = true;
+				} else {
+					$token .= $c;
+				}
+				break;
+
+			 default:
+				$token .= $c;
+			}
+		}
+
+		if (trim($token)!=='') {array_push($result, $token);}
+		
+		return $result;
+	 }
 
 	/* Does anyone really need ODT ? */
 }
