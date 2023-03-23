@@ -303,15 +303,10 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 	 */
 	 function tokenizeAttr($data) {
 
-		// this parser is a simple state-machine:
-		define('PSNEITHER',   0);
-		define('PSINQUOT',    1);
-		define('PSINBRACKET', 2);
-
 		$result = array();
 		$token = ''; // temporary storage of each item
 		$escaped = false; // should the next character be treated "as is"?
-		$state = PSNEITHER; // parser state
+		$state = 0; // parser state
 
 		// loop over all characters:
 		forEach(str_split($data) as $c) {
@@ -319,7 +314,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 			switch($c) {
 			 case ' ': // Space
 			
-				if (!$escaped && $state == PSNEITHER) {
+				if (!$escaped && $state == 0) {
 					if (trim($token)!==''){array_push($result, $token);}
 					$token = '';
 				} else {
@@ -331,20 +326,20 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 			 case '"': // Quote
 				
 				switch ($state) {
-				 case PSNEITHER:
+				 case 0:
 					if (trim($token)!==''){array_push($result, $token);}
-					$state = PSINQUOT;
+					$state = 1;
 					$token = $c;
 					break;
 					
-				 case PSINQUOT:
+				 case 1:
 					$token .= $c;
 					array_push($result, $token);
-					$state = PSNEITHER;
+					$state = 0;
 					$token = '';
 					break;
 			
-				 case PSINBRACKET:
+				 case 2:
 					$token .= $c;
 					break;
 			
@@ -356,11 +351,11 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 				
 			 case '[': // Opening Square Brackets
 
-				if (!$escaped && $state == PSNEITHER) {
+				if (!$escaped && $state == 0) {
 					
 					if (trim($token)!==''){array_push($result, $token);}
 					$token = $c;
-					$state = PSINBRACKET;				
+					$state = 2;				
 				
 				} else {
 					$token .= $c;
@@ -369,12 +364,12 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 
 			 case ']': // Opening Square Brackets
 			
-				if (!$escaped && $state == PSINBRACKET) {
+				if (!$escaped && $state == 2) {
 					
 					$token .= $c;
 					array_push($result, $token);
 					$token = '';
-					$state = PSNEITHER;
+					$state = 0;
 					
 				} else {
 					$token .= $c;
