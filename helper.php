@@ -138,8 +138,6 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 		$attr = array();
 		// split up the attributes string (keep quoted and square brackets intact):
 		$tokens = $this->tokenizeAttr($data);
-		
-		dbg('$tokens = ' . print_r($tokens, true));
 
 		foreach ($tokens as $token) {
 
@@ -304,31 +302,24 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 	 * @author Sascha Leib <sascha.leib(at)kolmio.com>
 	 */
 	 function tokenizeAttr($data) {
-		 
-		// key characters:
-		define('SPACECHAR', ' ');
-		define('QUOTECHAR', '"');
-		define('BRACHAR',   '[');
-		define('KETCHAR',   ']');
-		define('ESCAPECHAR','\\');
 
 		// this parser is a simple state-machine:
-		define('NEITHER',   0);
-		define('INQUOT',    1);
-		define('INBRACKET', 2);
+		define('PSNEITHER',   0);
+		define('PSINQUOT',    1);
+		define('PSINBRACKET', 2);
 
 		$result = array();
 		$token = ''; // temporary storage of each item
 		$escaped = false; // should the next character be treated "as is"?
-		$state = NEITHER; // parser state
+		$state = PSNEITHER; // parser state
 
 		// loop over all characters:
 		forEach(str_split($data) as $c) {
 			
 			switch($c) {
-			 case SPACECHAR: // _
+			 case ' ': // Space
 			
-				if (!$escaped && $state == NEITHER) {
+				if (!$escaped && $state == PSNEITHER) {
 					if (trim($token)!==''){array_push($result, $token);}
 					$token = '';
 				} else {
@@ -337,23 +328,23 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 				}
 				break;
 
-			 case QUOTECHAR: // "
+			 case '"': // Quote
 				
 				switch ($state) {
-				 case NEITHER:
+				 case PSNEITHER:
 					if (trim($token)!==''){array_push($result, $token);}
-					$state = INQUOT;
+					$state = PSINQUOT;
 					$token = $c;
 					break;
 					
-				 case INQUOT:
+				 case PSINQUOT:
 					$token .= $c;
 					array_push($result, $token);
-					$state = NEITHER;
+					$state = PSNEITHER;
 					$token = '';
 					break;
 			
-				 case INBRACKET:
+				 case PSINBRACKET:
 					$token .= $c;
 					break;
 			
@@ -363,34 +354,34 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 				break;
 				
 				
-			 case BRACHAR: // [
+			 case '[': // Opening Square Brackets
 
-				if (!$escaped && $state == NEITHER) {
+				if (!$escaped && $state == PSNEITHER) {
 					
 					if (trim($token)!==''){array_push($result, $token);}
 					$token = $c;
-					$state = INBRACKET;				
+					$state = PSINBRACKET;				
 				
 				} else {
 					$token .= $c;
 				}
 				break;
 
-			 case KETCHAR: // ]
+			 case ']': // Opening Square Brackets
 			
-				if (!$escaped && $state == INBRACKET) {
+				if (!$escaped && $state == PSINBRACKET) {
 					
 					$token .= $c;
 					array_push($result, $token);
 					$token = '';
-					$state = NEITHER;
+					$state = PSNEITHER;
 					
 				} else {
 					$token .= $c;
 				}
 				break;
 
-			 case ESCAPECHAR: // \
+			 case '\\': // Escape character
 			
 				if (!$escaped) {
 					// next character is escaped:
