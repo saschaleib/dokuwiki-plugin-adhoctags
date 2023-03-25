@@ -12,7 +12,6 @@ class syntax_plugin_adhoctags_abstractinline extends syntax_plugin_adhoctags_abs
     protected $special_pattern	= '<%t%\b[^>\r\n]*?/>';
     protected $entry_pattern	= '<%t%\b.*?>(?=.*?</%t%>)'; // '%t%' is the placeholder for the tag name
     protected $exit_pattern		= '</%t%>';
-	protected $configName		= 'inlineElements';
 
     function getAllowedTypes() { return array('formatting', 'substition', 'disabled'); }
     function getPType(){ return 'normal';}

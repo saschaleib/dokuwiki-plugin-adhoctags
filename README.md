@@ -7,13 +7,15 @@ More information on the [Plugin Page on DokuWiki](https://www.dokuwiki.org/plugi
 
 ## Tags/Elements
 
-The following HTML tags are added by this plugin:
-
-### 1. Inline elements
-
-Inline elements can appear inside a paragraph or other running text.
+The following HTML tags are added by this plugin (in alphabetic order):
 
 - `<abbr>` – “[Abbreviation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr)”
+
+- `<address>` – “[Address](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address)”
+
+- `<article>` – “[Article](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article)”
+
+- `<aside>` – “[Aside](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)”
 
 - `<b>` – “[Bring Attention To](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/b)” (also known as “bold”)
 
@@ -21,7 +23,15 @@ Inline elements can appear inside a paragraph or other running text.
 
 - `<cite>` – “[Citation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite)”
 
+- `<details>` – “[Details](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)” and `<summary>` – “[Summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary)”
+
 - `<dfn>` – “[Definition ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn)”
+
+- `<div>` – “[Generic block](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)”
+
+- `<figure>` – “[Figure](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure)” and `<figcaption>` – “[Figure caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption)”
+
+- `<h1>` … `<h6>` – “[Section Heading Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)”
 
 - `<i>` – “[Idiomatic Text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)” (also known as “italic”)
 
@@ -35,6 +45,8 @@ Inline elements can appear inside a paragraph or other running text.
 
 - `<samp>` – “[Sample Output](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp)”
 
+- `<section>` – “[Section](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section)”
+
 - `<small>` — “[Side content](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small)” (smaller)
 
 - `<span>` — “[Content span](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)”
@@ -44,26 +56,6 @@ Inline elements can appear inside a paragraph or other running text.
 - `<u>` – “[Unarticulated Annotation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u)” (also known as “underline”)
 
 - `<var>` – “[Variable](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var)”
-
-### 1. Block-level elements
-
-The following block-level elements are supported:
-
-- `<article>` – “[Article](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article)”
-
-- `<section>` – “[Section](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section)”
-
-- `<aside>` – “[Aside](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)”
-
-- `<address>` – “[Address](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address)”
-
-- `<details>` – “[Details](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)” and `<summary>` – “[Summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary)”
-
-- `<figure>` – “[Figure](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure)” and `<figcaption>` – “[Figure caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption)”
-
-- `<h1>` … `<h6>` – “[Section Heading Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)”
-
-- `<div>` – “[Generic block](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)”
 
 ## Attributes
 

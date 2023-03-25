@@ -16,13 +16,13 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
 	protected $extra_attr		= array(); /* non-standard attributes allowed here */
 	protected $enabled			= false; /* will be set by the constructors of instances */
 	protected $output_tag		= null; // override the tag name for output
-	protected $configName		= 'inlineElements';
+	protected $configName		= 'allowedElements';
 
 	/* hook to override the registration process, if needed: */
 	protected function registerTag() {
-		
+
 		$arr = explode(',', $this->getConf($this->configName));
-		
+
 		return in_array($this->tag, $arr);
 	}
 
@@ -42,8 +42,9 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
      * Connect pattern to lexer
      */
     function connectTo($mode) {
-
+		
 		if ($this->tag && $this->registerTag()) {
+
 			if ($this->special_pattern !== '') {
 				$this->Lexer->addSpecialPattern(str_replace('%t%', $this->tag, $this->special_pattern),$mode,'plugin_adhoctags_'.$this->getPluginComponent());
 			}

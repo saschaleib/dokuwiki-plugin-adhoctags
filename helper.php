@@ -1,6 +1,6 @@
 <?php
 /**
- * Helper Component for the Wrap Plugin
+ * Helper Component for the Ad Hoc Tags Plugin
  *
  * @license	GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author	 Anika Henke <anika@selfthinker.org>
@@ -52,6 +52,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 					/* common HTML attributes (always enabled) */
 
 					case 'id':			/* id */
+					case 'class':		/* custom classes */
 					case 'title':		/* title */
 					case 'style':		/* style */
 					case 'lang':		/* language */
@@ -61,14 +62,8 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 						$out .= ' '.$key.'="'.$val.'"';
 						break;
 
-					case 'class':		/* custom classes */
-						if (trim($val) !== '') {
-							$out .= ' '.$key.'="'.hsc($val).' '.$addClass.'"';
-						}
-						break;
-
 					case 'hidden':		/* hidden */
-						$out .= ' '.$key . ( is_null($val) ? '' : '="'.hsc($val).'"' );
+						$out .= ' '.$key.( is_null($val) ? '' : '="'.hsc($val).'"' );
 						break;
 
 					case 'width':	/* custom width (deprecated, not compatible with 'style'!)*/

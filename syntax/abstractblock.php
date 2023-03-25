@@ -12,7 +12,6 @@ class syntax_plugin_adhoctags_abstractblock extends syntax_plugin_adhoctags_abst
     protected $special_pattern = '<%t%\b[^>\r\n]*?/>';
     protected $entry_pattern   = '<%t%\b.*?>(?=.*?</%t%>)';
     protected $exit_pattern    = '</%t%>';
-	protected $configName		= 'blockElements';
 
     function getAllowedTypes() {
 		return array('container', 'formatting', 'substition', 'protected', 'disabled', 'paragraphs');
