@@ -13,10 +13,11 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
     protected $special_pattern = '<%t%\b[^>\r\n]*?/>';
     protected $entry_pattern   = '<%t%\b.*?>(?=.*?</%t%>)';
     protected $exit_pattern    = '</%t%>';
-	protected $extra_attr		= array(); /* non-standard attributes allowed here */
+	protected $extra_attr		= array(); /* non-standard attributes allowed in some instances */
 	protected $enabled			= false; /* will be set by the constructors of instances */
-	protected $output_tag		= null; // override the tag name for output
+	protected $output_tag		= null;  /* allows overriding the tag name for output */
 	protected $configName		= 'allowedElements';
+	protected $pluginName		= 'adhoctags';
 
 	/* hook to override the registration process, if needed: */
 	protected function registerTag() {
@@ -42,23 +43,26 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
      * Connect pattern to lexer
      */
     function connectTo($mode) {
-		
+
 		if ($this->tag && $this->registerTag()) {
 
+			/* debug:
+			if ($this->tag == 'wrap' || $this->tag == 'WRAP')
+				dbg('connectTo called for ' . $this->tag .', output = ' . $this->output_tag ); */
+
 			if ($this->special_pattern !== '') {
-				$this->Lexer->addSpecialPattern(str_replace('%t%', $this->tag, $this->special_pattern),$mode,'plugin_adhoctags_'.$this->getPluginComponent());
+				$this->Lexer->addSpecialPattern(str_replace('%t%', $this->tag, $this->special_pattern),$mode,'plugin_' . $this->pluginName.'_'.$this->getPluginComponent());
 			}
 			if ($this->entry_pattern !== '') {
-				$this->Lexer->addEntryPattern(str_replace('%t%', $this->tag, $this->entry_pattern),$mode,'plugin_adhoctags_'.$this->getPluginComponent());
+				$this->Lexer->addEntryPattern(str_replace('%t%', $this->tag, $this->entry_pattern),$mode,'plugin_' . $this->pluginName.'_'.$this->getPluginComponent());
 			}
 		}
     }
-
     function postConnect() {
 
 		if ($this->tag && $this->registerTag()) {
 			if ($this->exit_pattern !== '') {
-				$this->Lexer->addExitPattern(str_replace('%t%', $this->tag, $this->exit_pattern), 'plugin_adhoctags_'.$this->getPluginComponent());
+				$this->Lexer->addExitPattern(str_replace('%t%', $this->tag, $this->exit_pattern), 'plugin_' . $this->pluginName.'_'.$this->getPluginComponent());
 			}
 		}
     }
@@ -67,6 +71,9 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
 	 * Overrideable hooks for different handle states:
 	 **/
 	function handleEnterSpecial($match, $state, $pos, Doku_Handler $handler) {
+		
+		//dbg('handleEnterSpecial: "' . $match );
+		
 		$data = trim(substr($match,strpos($match,' '),-1)," \t\n/");
 		return array($state, $data);
 	}
@@ -74,8 +81,9 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
 	function handleUnmatched($match, $state, $pos, Doku_Handler $handler) {
         global $conf;
 
+		//dbg('handleUnmatched: "' . $match );
 
-		if (substr($match, 0, 2) == '==') { // it's a headline
+		if (substr($match, 0, 2) == '==') { // special case: it's a headline
 			$title = trim($match);
 			$level = max(7 - strspn($title,'='), 1);
 			$title = trim($title,'= ');
@@ -93,11 +101,13 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
 
 	function handleMatched($match, $state, $pos, Doku_Handler $handler) {
 
-		dbg('DOKU_LEXER_MATCHED: ' . $match);
+		//dbg('DOKU_LEXER_MATCHED: ' . $match);
 	}
 	
 	function handleExit($match, $state, $pos, Doku_Handler $handler) {
 
+		//dbg('handleExit: "' . $match );
+	
 		return array($state, '');
 
 	}
@@ -106,6 +116,9 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
      * Handle the match
      */
     function handle($match, $state, $pos, Doku_Handler $handler){
+
+		//dbg('handle: "' . $match );
+
         switch ($state) {
             case DOKU_LEXER_ENTER:
             case DOKU_LEXER_SPECIAL:
@@ -134,8 +147,13 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
     function render($format, Doku_Renderer $renderer, $indata) {
         static $type_stack = array ();
 
+		//dbg('render: format="' . $format .'", indata="' . implode(', ', $indata) . '"');
+
         if (empty($indata)) return false;
         list($state, $data) = $indata;
+		
+		// is there an overridden output tag?
+		$outTag = ($this->output_tag ? $this->output_tag : $this->tag);
 
         if($format == 'xhtml'){
             switch ($state) {
@@ -144,12 +162,12 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
                     $wrap = $this->loadHelper('adhoctags', true);
                     $attr = $wrap->buildAttributes($data, $this->extra_attr);
 
-                    $renderer->doc .= '<'.($this->output_tag ? $this->output_tag : $this->tag).$attr.'>';
-                    if ($state == DOKU_LEXER_SPECIAL) $renderer->doc .= '</'.($this->output_tag ? $this->output_tag : $this->tag).'>';
+                    $renderer->doc .= '<'.$outTag . $attr.'>';
+                    if ($state == DOKU_LEXER_SPECIAL) $renderer->doc .= '</'.$outTag.'>';
                     break;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</'.($this->output_tag ? $this->output_tag : $this->tag).'>';
+                    $renderer->doc .= '</'.$outTag.'>';
                     break;
             }
             return true;
@@ -158,7 +176,7 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
             switch ($state) {
                 case DOKU_LEXER_ENTER:
                     $wrap = plugin_load('helper', 'adhoctags');
-                    array_push ($type_stack, $wrap->renderODTElementOpen($renderer, ($this->output_tag ? $this->output_tag : $this->tag), $data));
+                    array_push ($type_stack, $wrap->renderODTElementOpen($renderer, $outTag , $data));
                     break;
 
                 case DOKU_LEXER_EXIT:

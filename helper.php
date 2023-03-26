@@ -301,49 +301,56 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 		$result = array();
 		$token = ''; // temporary storage of each item
 		$escaped = false; // should the next character be treated "as is"?
-		$state = 0; // parser state
+		$state = 0; // parser state (0 = default, 1 = in quotation, 2 = in square backets)
 
 		// loop over all characters:
 		forEach(str_split($data) as $c) {
 			
 			switch($c) {
 			 case ' ': // Space
+			 case '\t': // Horizontal tabulation
+			 case '\n': // Newline
+			 case '\r': // Carriage return
 			
 				if (!$escaped && $state == 0) {
 					if (trim($token)!==''){array_push($result, $token);}
 					$token = '';
 				} else {
-					$token = $token . $c;
+					$token .= ' ';
 					$escaped = false;
 				}
 				break;
 
 			 case '"': // Quote
 				
-				switch ($state) {
-				 case 0:
-					if (trim($token)!==''){array_push($result, $token);}
-					$state = 1;
-					$token = $c;
-					break;
-					
-				 case 1:
+				if (!$escaped) {
+					switch ($state) {
+					 case 0:
+						if (trim($token)!==''){array_push($result, $token);}
+						$state = 1;
+						$token = $c;
+						break;
+						
+					 case 1:
+						$token .= $c;
+						array_push($result, $token);
+						$state = 0;
+						$token = '';
+						break;
+				
+					 case 2:
+						$token .= $c;
+						break;
+				
+					 default:
+						// should never happen!
+					}
+				} else {
 					$token .= $c;
-					array_push($result, $token);
-					$state = 0;
-					$token = '';
-					break;
-			
-				 case 2:
-					$token .= $c;
-					break;
-			
-				 default:
-					// should never happen!
+					$escaped = false;
 				}
 				break;
-				
-				
+
 			 case '[': // Opening Square Brackets
 
 				if (!$escaped && $state == 0) {
@@ -368,6 +375,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 					
 				} else {
 					$token .= $c;
+					$escaped = false;
 				}
 				break;
 
@@ -378,11 +386,13 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 					$escaped = true;
 				} else {
 					$token .= $c;
+					$escaped = false;
 				}
 				break;
 
 			 default:
 				$token .= $c;
+				$escaped = false;
 			}
 		}
 
