@@ -85,7 +85,3 @@ Instead of specifying the attributes in the HTML format, this plugin replicates 
 
 Generally, attributes can appear in any order and are always optional!
 
-
-## Work in Progress
-
-This plugin is still “work in progress” and should not be used in a production environment. Any aspect of it may still change without notice. Feedback and suggestions are of course always welcome!
