@@ -20,3 +20,4 @@ $lang['inlineElements'] = "Erlaube die folgenden <i>inline</i>-Tags:<br /><small
 	$lang['inlineElements_time'] = '<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/time" target="_blank">Datum/Uhrzeit</a>: <code>&lt;time&gt;</code>';
 	$lang['inlineElements_u'] = '<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/u" target="_blank">Hervorhebung</a>: <code>&lt;u&gt;</code>';
 	$lang['inlineElements_var'] = '<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/var" target="_blank">Variable</a>: <code>&lt;var&gt;</code>';
+	$lang['inlineElements_pre'] = '<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/pre" target="_blank">Vorformatiert</a>: <code>&lt;pre&gt;</code>';

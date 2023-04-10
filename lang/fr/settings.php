@@ -21,3 +21,4 @@ $lang['inlineElements'] = "Activer les balises <i>en ligne</i> suivantes:<br /><
 	$lang['inlineElements_time'] = '<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/time" target="_blank">Date/temps</a> : <code>&lt;time&gt;</code>';
 	$lang['inlineElements_u'] = '<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/u" target="_blank">Annotation non articulée</a> : <code>&lt;u&gt;</code>';
 	$lang['inlineElements_var'] = '<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/var" target="_blank">Variable</a> : <code>&lt;var&gt;</code>';
+	$lang['inlineElements_pre'] = '<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/pre" target="_blank">Préformaté</a> : <code>&lt;pre&gt;</code>';

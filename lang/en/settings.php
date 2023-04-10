@@ -29,6 +29,7 @@ $lang['allowedElements'] = "Enable the following <abbr>HTML</abbr> tags:<br /><s
 	$lang['allowedElements_i'] = '<code>&lt;i&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i" target="_blank">idiomatic text</a>)';
 	$lang['allowedElements_kbd'] = '<code>&lt;kbd&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd" target="_blank">keyboard input</a>)';
 	$lang['allowedElements_mark'] = '<code>&lt;mark&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark" target="_blank">mark text</a>)';
+	$lang['allowedElements_pre'] = '<code>&lt;pre&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre" target="_blank">preformatted</a>)';
 	$lang['allowedElements_q'] = '<code>&lt;q&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q" target="_blank">inline quotation</a>)';
 	$lang['allowedElements_s'] = '<code>&lt;s&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s" target="_blank">strikethrough</a>)';
 	$lang['allowedElements_samp'] = '<code>&lt;samp&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp" target="_blank">sample output</a>)';
