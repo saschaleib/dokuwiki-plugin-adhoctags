@@ -189,4 +189,5 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
         }
         return false;
     }
+
 }
