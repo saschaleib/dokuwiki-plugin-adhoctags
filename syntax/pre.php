@@ -14,4 +14,10 @@ class syntax_plugin_adhoctags_pre extends syntax_plugin_adhoctags_abstractblock 
 
 	protected $tag	= 'pre';
 
+	protected function registerTag() { return true;}
+
+    function getAllowedTypes() {
+		return array('baseonly','formatting');
+	}
+    function getPType(){ return 'preformatted';}
 }

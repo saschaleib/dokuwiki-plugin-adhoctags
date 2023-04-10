@@ -39,6 +39,8 @@ The following HTML tags are added by this plugin (in alphabetic order):
 
 - `<mark>` — “[Mark text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)”
 
+- `<pre>` – “[Preformatted Text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre)”
+
 - `<q>` – “[Inline Quotation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q)”
 
 - `<s>` – “[Strikethrough](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s)”

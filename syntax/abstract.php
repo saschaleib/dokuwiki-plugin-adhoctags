@@ -35,8 +35,11 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
     function getSort(){ return 195; }
     // override default accepts() method to allow nesting - ie, to get the plugin accepts its own entry syntax
     function accepts($mode) {
-        if ($mode == substr(get_class($this), 7)) return true;
-        return parent::accepts($mode);
+        if ($mode == substr(get_class($this), 7)) {
+			return true;
+		} else {
+			return parent::accepts($mode);
+		}
     }
 
     /**
@@ -47,8 +50,8 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
 		if ($this->tag && $this->registerTag()) {
 
 			/* debug:
-			if ($this->tag == 'wrap' || $this->tag == 'WRAP')
-				dbg('connectTo called for ' . $this->tag .', output = ' . $this->output_tag ); */
+			if ($mode == 'plugin_adhoctags_pre')
+				dbg('connectTo plugin_adhoctags_pre called for ' . $this->tag .', output = ' . $this->output_tag ); */
 
 			if ($this->special_pattern !== '') {
 				$this->Lexer->addSpecialPattern(str_replace('%t%', $this->tag, $this->special_pattern),$mode,'plugin_' . $this->pluginName.'_'.$this->getPluginComponent());
