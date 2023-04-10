@@ -21,3 +21,6 @@ $lang['inlineElements'] = "Erlaube die folgenden <i>inline</i>-Tags:<br /><small
 	$lang['inlineElements_u'] = '<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/u" target="_blank">Hervorhebung</a>: <code>&lt;u&gt;</code>';
 	$lang['inlineElements_var'] = '<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/var" target="_blank">Variable</a>: <code>&lt;var&gt;</code>';
 	$lang['inlineElements_pre'] = '<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/pre" target="_blank">Vorformatiert</a>: <code>&lt;pre&gt;</code>';
+
+$lang['allowStyle'] = "Erlaube <em>inline-Style</em>:<br /><small>(Eingeschränkte Unterstützung, nur eher einfache Stile funktionieren)</code>)</small>";
+$lang['allowJSLinks'] = "Erlaube <code>javascript:</code>-<abbr>URL</abbr>s in <code>&lt;a&gt;</code> (<b style='color:red'>experimentell!</b>):<br /><small>(Wichtig: vor Aktivierung unbedingt die <a href='https://www.dokuwiki.org/plugin:adhoctags#security' target='_blank'>Sicherheitshinweise</a> beachten!)</small>";
