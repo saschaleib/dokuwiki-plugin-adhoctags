@@ -59,6 +59,8 @@ The following HTML tags are added by this plugin (in alphabetic order):
 
 - `<var>` – “[Variable](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var)”
 
+Please note that `<div>` and `<span>` are also handled by the [Wrap](https://github.com/selfthinker/dokuwiki_plugin_wrap) Plugin and having them enabled while Wrap is also active can lead to unexpected results. If you need the attribute features of this plugin with these tags, it is better to disable Wrap, and possibly use [Ad-Hoc Wrap](https://github.com/saschaleib/dokuwiki-plugin-adhocwrap) instead as a replacement.
+
 ## Attributes
 
 Instead of specifying the attributes in the HTML format, this plugin replicates and expands the formats used by the **wrap** plugin, which allows to specify the attributes as in the following example:
