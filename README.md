@@ -89,3 +89,31 @@ Instead of specifying the attributes in the HTML format, this plugin replicates 
 
 Generally, attributes can appear in any order and are always optional!
 
+## Migration Notes
+
+If you previously used `<html>` tags to embed HTML code into your DokuWiki site, you need to replace them with the format used by this plugin. The best way to get started is to make a run a couple  of search-replace operations on the `data/pages/` directory in your DokuWiki installation.
+
+:bangbang: **Important:** It is advisable to run the following searches on a *copy* of this directory and also keep a backup of the original state, in case of problems that only show up later. The following search-replace operations can do serious damage to your site content. The autor does not take any responsibility for any damages that follow from applying this procedure: :bangbang:
+
+:information_source: **Tool:** The autor has made good experiences with the Search-Replace function of [Notepad++](https://github.com/notepad-plus-plus/notepad-plus-plus), an open-source, free and very powerful text editor for Windows. Other editors may of course also offer similar functionality.
+
+**1. Remove the *\<html\>* tags**
+
+- Search for `<html>`in default mode, replace with an empty string.
+- Search for `</html>`in default mode, replace with an empty string.
+
+**2. Remove the attribute name from *title="…"* attributes**
+
+- search for ` title="` (note the space in front!) in standard mode, replace with ` "` (space + quotation mark)
+
+**3. Format the language specifications (if needed)
+
+- Search for ` lang="([^\"]*)"` in *regex mode* (!), replace with ` :$1` (note: spaces in front of each!)
+
+**4. Simplify any *class*es**
+
+- Search for ` class="([^\"]*)"` in *regex mode* (!), replace with ` $1` (note the spaces again!)
+
+In most cases, these should take care of the vast majority of HTML attributes. Make sure to check each file and clean up anything that these searches didn't catch.
+
+If needed, similar searches can also be used for other attributes (e.g. ` style="([^\"]*)"` -> ` [style=$1]` for style), but it is probably a good idea to manually update these, rather than relying on automatisms.
