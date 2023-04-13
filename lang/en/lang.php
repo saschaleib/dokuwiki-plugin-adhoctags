@@ -17,6 +17,7 @@ $lang['var']	= 'Variable';
 $lang['mark']	= 'Marked text';
 $lang['time']	= 'Date/Time';
 
+$lang['dl']		= 'Description List';
 $lang['figure']		= 'Figure + Caption';
 $lang['article']	= 'Article block';
 $lang['section']	= 'Generic section';

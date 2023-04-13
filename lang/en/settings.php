@@ -16,6 +16,9 @@ $lang['allowedElements'] = "Enable the following <abbr>HTML</abbr> tags:<br /><s
 	$lang['allowedElements_cite'] = '<code>&lt;cite&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite" target="_blank">citation</a>)';
 	$lang['allowedElements_details'] = '<code>&lt;details&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details" target="_blank">disclosure details</a>)';
 	$lang['allowedElements_dfn'] = '<code>&lt;dfn&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn" target="_blank">definition</a>)';
+	$lang['allowedElements_dl'] = '<code>&lt;dl&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl" target="_blank">description list</a>)';
+	$lang['allowedElements_dt'] = '<code>&lt;dt&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dt" target="_blank">description term</a>)';
+	$lang['allowedElements_dd'] = '<code>&lt;dd&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dd" target="_blank">description details</a>)';
 	$lang['allowedElements_div'] = '<code>&lt;div&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div" target="_blank">content division</a>)';
 	$lang['allowedElements_em'] = '<code>&lt;em&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em" target="_blank">emphasis</a>)';
 	$lang['allowedElements_figcaption'] = '<code>&lt;figcaption&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption" target="_blank">Fig. caption</a>)';

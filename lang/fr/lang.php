@@ -19,3 +19,11 @@ $lang['samp']	= 'Échantillon en sortie ';
 $lang['var']	= 'Variable ';
 $lang['mark']	= 'Marquage ';
 $lang['time']	= 'Date/temps ';
+
+$lang['dl']		= 'Liste de descriptions';
+$lang['figure']		= 'Figure avec légende';
+$lang['article']	= 'Article';
+$lang['section']	= 'Section générique';
+$lang['aside']		= 'Élément aparté';
+$lang['address']	= 'Adresse de contact';
+$lang['details']	= 'Détails + résumé';
