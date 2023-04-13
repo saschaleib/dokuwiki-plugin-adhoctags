@@ -145,14 +145,6 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 				/* block-level elements: */
 				array(
 					'type'		=> 'format',
-					'title'		=> $this->getLang('dl').': <𝚍𝚕>/<𝚍𝚝>/<𝚍𝚍>',
-					'icon'		=> '../../plugins/adhoctags/images/definition-list.svg',
-					'open'		=> '<dl>\n<dt>',
-					'close'		=> '</dt>\n<dd>Description</dd>\n</dl>',
-					'sample'	=> 'Term'
-				),
-				array(
-					'type'		=> 'format',
 					'title'		=> $this->getLang('section').': <𝚜𝚎𝚌𝚝𝚒𝚘𝚗>',
 					'icon'		=> '../../plugins/adhoctags/images/code-brackets.svg',
 					'open'		=> '<section>\n',
@@ -182,6 +174,14 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 					'open'		=> '<article>\n',
 					'close'		=> '\n</article>',
 					'sample'	=> 'Article text'
+				),
+				array(
+					'type'		=> 'format',
+					'title'		=> $this->getLang('dl').': <𝚍𝚕>/<𝚍𝚝>/<𝚍𝚍>',
+					'icon'		=> '../../plugins/adhoctags/images/definition-list.svg',
+					'open'		=> '<dl>\n<dt>',
+					'close'		=> '</dt>\n<dd>Description</dd>\n</dl>',
+					'sample'	=> 'Term'
 				),
 				array(
 					'type'		=> 'format',
