@@ -25,7 +25,9 @@ The following HTML tags are added by this plugin (in alphabetic order):
 
 - `<details>` – “[Details](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)” and `<summary>` – “[Summary](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary)”
 
-- `<dfn>` – “[Definition ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn)”
+- `<dfn>` – “[Definition](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn)”
+
+- `<dl>` – “[Description list](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl)”, `<dt>` – “[Description term](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dt)”, and `<dd>` – “[Description details](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dd)”
 
 - `<div>` – “[Generic block](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)”
 
@@ -75,17 +77,13 @@ Instead of specifying the attributes in the HTML format, this plugin replicates 
 
 - `:lang` – a colon (`:`), followed by a valid [BCP47](https://www.rfc-editor.org/info/bcp47) language code. Examples: `:en`, `:fr-CH`, `:grc-Latn`, etc. See also: “[Declaring language in HTML](https://www.w3.org/International/questions/qa-html-language-declarations)”.
 
-  Note: this will also set the HTML `dir` attribute: either by setting a language code that has a default RTL script, or by appending a script tag that refers to a RTL script (e.g. `Arab` or `Hebr`).
+  Note: this will also set the HTML `dir` attribute: either by setting a language code that has a default RTL script, or by appending a script tag that refers to a RTL script (e.g. `Arab` or `Hebr`). The resulting text direction can still be overriden by the `[dir=…]` attribute (see below)
   
 - `"Title text"` – A string that is enclosed in double quotes will be rendered as `title`.
-  
-- Testing: `&datetime` – an ampersand (`&`), followed by a valid date and/or time, or period specification. Examples: `&2022-12-24T18:00` ([more examples](https://www.w3schools.com/Tags/att_time_datetime.asp)). (note: this might be changed in one of the comming releases).
 
-  Note: This attribute is only valid for `<time>` elements.
+- `classname` – anything that does matches a valid CSS class name (and none of the other formats) will be treated as a class name.
 
-  Note2: for technical reasons, there can be no spaces in this attribute. Please use one of the formats that do not include a space.
-  
-- `classname` – anything that does not match the criteria above will be treated as a class name.
+- `[name=value]` – extended format for all other allowed attributes. For example, `[style=color:red]`, or `[dir=ltr]` to override the text direction set by the `:lang` attribute, etc.
 
 Generally, attributes can appear in any order and are always optional!
 
