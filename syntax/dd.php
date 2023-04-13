@@ -10,7 +10,7 @@
  * @author     Sascha Leib <sascha.leib(at)kolmio.com>
  */
 
-class syntax_plugin_adhoctags_dd extends syntax_plugin_adhoctags_abstractblock {
+class syntax_plugin_adhoctags_dd extends syntax_plugin_adhoctags_abstractheadline {
 
 	protected $tag	= 'dd';
 
