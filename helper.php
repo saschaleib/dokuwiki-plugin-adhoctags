@@ -60,7 +60,14 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 					case 'lang':		/* language */
 					case 'tabindex':	/* tabindex */
 					case 'is':			/* is */
-						$out .= ' '.$key.'="'.hsc($val).'"';
+					
+					/* Microformat attributes */
+					case 'itemprop':	/* item property */
+					case 'itemscope':	/* item scope */
+					case 'itemref':		/* item reference */
+					case 'itemid':		/* item id (microformat) */
+					
+						$out .= ' '.$key. (is_null($val) ? '' : '="'.$val.'"');
 						break;
 
 					case 'dir':		/* custom attribute: direction */
@@ -69,6 +76,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 							$out .= ' dir="'. hsc($val).'"';
 						}
 						break;
+
 
 					case 'hidden':		/* custom attribute: hidden */
 										
@@ -89,7 +97,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 					
 						/* special case: data- attributes: */
 						if (preg_match('/^data-[a-z][a-z0-9_-]*$/', $key)) {
-							$out .= ' '.$key.'="'.hsc($val).'"';
+							$out .= ' '.$key.'="'.hsc(strtolower($val)).'"';
 						}
 					
 						/* any other attribute: ask the class if it is allowed: */
