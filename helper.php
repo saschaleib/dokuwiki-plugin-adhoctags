@@ -15,6 +15,9 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 	static protected $rtlscripts = array('arab','thaa','hebr','deva','shrd');
 	/* selection of left-to-right scripts (may override the language defaults to ltr) */
 	static protected $ltrscripts = array('latn','cyrl','grek','cyrs','armn');
+	/* tag attributes that are always allowed: */
+	static protected $globalattr = array('dir','hidden','is','itemid','itemprop','itemref','itemscope','itemtype','role','tabindex');
+
 
 	/* Helper plugins should return info about the methods supported. */
 	public function getMethods() {
@@ -34,11 +37,11 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 	}
 
 	/**
-	 * build attributes (write out classes, width, lang and dir)
+	 * build attributes
 	 */
-	function buildAttributes($data, $custom, $addClass='', $mode='xhtml') {
+	function buildAttributes($data, $myObj, $addClass='', $mode='xhtml') {
 
-		$attList = $this->getAttributes($data, $custom);
+		$attList = $this->getAttributes($data);
 		$out = '';
 		
 		//dbg('attList=' . print_r($attList, true));
@@ -54,56 +57,46 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 					case 'id':			/* id */
 					case 'class':		/* custom classes */
 					case 'title':		/* title */
-					case 'style':		/* style */
 					case 'lang':		/* language */
-					case 'dir':			/* direction */
 					case 'tabindex':	/* tabindex */
 					case 'is':			/* is */
-						$out .= ' '.$key.'="'.$val.'"';
+						$out .= ' '.$key.'="'.hsc($val).'"';
 						break;
 
-					case 'hidden':		/* hidden */
-						$out .= ' '.$key.( is_null($val) ? '' : '="'.hsc($val).'"' );
-						break;
-
-					case 'width':	/* custom width (deprecated, not compatible with 'style'!)*/
-						if(!isset($attList['style'])) {
-							if (strpos($val,'%') !== false) {
-								$out .= ' style="width: '.hsc($val).';"';
-							} else {
-								// anything but % should be 100% when the screen gets smaller
-								$out .= ' style="width: '.hsc($val).'; max-width: 100%;"';
-							}
+					case 'dir':		/* custom attribute: direction */
+										
+						if (in_array(strtolower(trim($val)), array('ltr','rtl','auto'))) {
+							$out .= ' dir="'. hsc($val).'"';
 						}
 						break;
 
-					/* specific HTML attributes (only allowed in certain contexts) */
-					case 'datetime':		/* datetime attribute (only for <time> elements) */
-					case 'rel':				/* link rel */
-					case 'target':			/* link target */
-					case 'hreflang':		/* link language */
-						if (in_array($key, $custom)) {
-							$out .= ' '.$key.'="'.hsc($val).'"';
+					case 'hidden':		/* custom attribute: hidden */
+										
+						if (in_array(strtolower(trim($val)), array('hidden','until-found'))) {
+							$out .= ' hidden="'. hsc($val).'"';
+						} else {
+							$out .= ' hidden';
 						}
 						break;
-						
-					case 'href':			/* link URL */
-						if ($this->getConf('allowJSLinks') == '0'
-						 && substr($val, 0, 11) === 'javascript:') {
-							 break;
-						} elseif (in_array($key, $custom)) {
+
+					case 'style':		/* style can be disabled */
+						if ($this->getConf('allowStyle') == '1') {
 							$out .= ' '.$key.'="'.hsc($val).'"';
 						}
 						break;
 
-					case 'open':		/* open switch attribute (only for <details>) */
-						if (in_array($key, $custom)) {
-							$out .= ' '.$key . ( is_null($val) ? '' : '="'.hsc($val).'"' );
-						}
-						break;
-						
 					default:
-						dbg('Unknown attribute: ' . $key);
+					
+						/* special case: data- attributes: */
+						if (preg_match('/^data-[a-z][a-z0-9_-]*$/', $key)) {
+							$out .= ' '.$key.'="'.hsc($val).'"';
+						}
+					
+						/* any other attribute: ask the class if it is allowed: */
+						
+						if ($myObj->allowAttribute($key, $val)) {
+							$out .= ' '.$key. (is_null($val) ? '' : '="'.$val.'"');
+						}
 				}
 			}
 
@@ -125,9 +118,9 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 	 * @author Christopher Smith <chris@jalakai.co.uk>
 	 *   (parts taken from http://www.dokuwiki.org/plugin:box)
 	 */
-	function getAttributes($data, $custom, $useNoPrefix=true) {
+	function getAttributes($data) {
 
-		//dbg('getAttributes("$data="' . $data . '",  $custom=' . print_r($custom, true));
+		//dbg('getAttributes("$data="' . $data . '"');
 
 		// store the attributes here:
 		$attr = array();
@@ -136,15 +129,9 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 
 		foreach ($tokens as $token) {
 
-			//get width (depracated, may be removed later!)
-			if (preg_match('/^\d*\.?\d+(%|px|em|rem|ex|ch|vw|vh|pt|pc|cm|mm|in)$/', $token)) {
-				$attr['width'] = $token;
-				continue;
-			}
-
 			//get language attribute
 			if (preg_match('/^:([a-z\-]+)/', $token)) {
-				$attr['lang'] = trim($token,':');
+				$attr['lang'] = strtolower(trim($token,':'));
 				continue;
 			}
 
@@ -163,7 +150,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 			/* custom attributes */
 			if (preg_match('/^\[([^\]]+)\]$/', $token)) {
 				
-				$cAttr = $this->parseCustomAttribute(trim($token,'[]'));
+				$cAttr = explode('=', trim($token,'[]'), 2);
 				//dbg('$token = ' . $token . ', $cAttr = ' . print_r($cAttr, true));
 				if ($cAttr) {
 					$attr[$cAttr[0]] = ( isset($cAttr[1]) ? $cAttr[1] : null );
@@ -193,102 +180,6 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 		}
 
 		return $attr;
-	}
-
-	/**
-	 * Parse custom attributes into key-value pairs
-	 *
-	 * @author Sascha Leib <sascha.leib(at)kolmio.com>
-	 */
-	function parseCustomAttribute($token) {
-		global $conf;
-
-		$kvp = explode('=', $token, 2);
-		//dbg('$kvp = ' . print_r($kvp, true));
-		
-		$r = null; // return value
-		if ($kvp && count($kvp) > 0) {
-			
-			$kvp[0] = strtolower($kvp[0]); // always use lowercase name!
-			$val = ( count($kvp) > 1 ? $kvp[1] : $kvp[0] );
-
-			// only explicitely allowed attribute names are passed on:
-			switch ($kvp[0]) {
-			case 'datetime': // datetime (for <time> only)
-				if (preg_match('/^[\w\d\s_+-:]+$/i', $val)) {
-					$r = $kvp;
-				}
-				break;
-			case 'dir': // direction override
-				if (in_array($val, array('auto', 'rtl', 'ltr'))) {
-					$r = $kvp;
-				}
-				break;
-			case 'hidden': // hidden element
-				if (count($kvp) == 1 || in_array($val, array('', 'hidden', 'until-found'))) {
-					$r = $kvp;
-				}
-				break;
-			case 'href': // links in <a> elements
-				if (preg_match('/^[\w\.:;%#~@\/\(\)\']+$/i', $val)) {
-					$r = $kvp;
-				}
-				break;
-			case 'rel': // rel in <a> elements
-				if (preg_match('/^[\w\d\-_]+$/i', $val)) {
-					$r = $kvp;
-				}
-				break;
-			case 'hreflang': // link language in <a> elements
-				if (preg_match('/^[\w\-]+$/i', $val)) {
-					$r = $kvp;
-				}
-				break;
-			case 'is': // custom elements
-				if (preg_match('/^[a-z]+\-\w+$/i', $val)) {
-					$r = $kvp;
-				}
-				break;
-			case 'open': // disclosure only
-				if (count($kvp) == 1 || in_array($val, array('','open'))) {
-					$r = $kvp;
-				}
-				break;
-			case 'role': // ARIA Role
-				if (preg_match('/^\w+$/', $val)) {
-					$r = $kvp;
-				}
-				break;
-			case 'style': // style attribute (experimental, not compatible with 'width'!)
-				if ($this->getConf('allowStyle') == '1'
-				 && preg_match('/^[\w\-\_\'#\;\:\.\(\)]+$/', $val)) {
-					$r = $kvp;
-				}
-				break;
-			case 'tabindex': // tabindex must be integer
-				if (filter_var($val, FILTER_VALIDATE_INT)) {
-					$r = $kvp;
-				}
-				break;
-				
-			case 'itemid': // embedded microdata attributes (simplified check, not fully implemented yet)
-			case 'itemprop':
-			case 'itemref':
-			case 'itemscope': // may be empty
-			case 'itemtype':
-				if (count($kvp) == 1 || preg_match('/^[\w:%~/]+$/', $val)) {
-					$r = $kvp;
-				}
-				break;
-				
-			default: // one more special case:
-				
-				if (preg_match('/^data-[\w]+$/i', $kvp[0])) {  // data-* attributes
-					$r = $kvp;
-				}
-			}
-		}
-		return $r;
 	}
 
 	/**
@@ -401,5 +292,5 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 		return $result;
 	 }
 
-	/* Does anyone really need ODT ? */
+	/* Does anyone miss ODT support? */
 }

@@ -14,5 +14,11 @@ class syntax_plugin_adhoctags_time extends syntax_plugin_adhoctags_abstractinlin
 
 	protected $tag	= 'time';
 
-	protected $extra_attr	= array('datetime');
+	/* allow link attributes: */
+	function allowAttribute(&$name, &$value) {
+		//dbg('<time>:allowAttribute(' . $name . ', "' . $value . '")');
+
+		return ( $name == 'datetime' && preg_match('/^[\w\d\s_+-:]+$/i', $value) );
+
+	}
 }

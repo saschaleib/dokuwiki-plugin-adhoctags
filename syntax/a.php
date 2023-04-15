@@ -14,6 +14,39 @@ class syntax_plugin_adhoctags_a extends syntax_plugin_adhoctags_abstractinline {
 
 	protected $tag	= 'a';
 
-	protected $extra_attr = array('href','rel','target','hreflang');
+	/* allow link attributes: */
+	function allowAttribute(&$name, &$value) {
+		//dbg('<a>:allowAttribute(' . $name . ', "' . $value . '")');
 
+		switch ($name) {
+			case 'href':
+			
+				if ($this->getConf('allowJSLinks') == '0'
+				 && substr($value, 0, 11) === 'javascript:') {
+					return false;
+				}
+				return true;
+
+			case 'rel':
+				return (preg_match('/^([\w\d]+ ?)+$/', trim($value)));
+				break;
+
+			case 'target':
+				return (preg_match('/^[\w\d_-]+$/', trim($value)));
+				break;
+
+			case 'hreflang':
+				return (preg_match('/^[\w\-]+$/', trim($value)));
+				break;
+
+			case 'download':
+				return (preg_match('/^[\w\-_\.]+$/', trim($value)));
+				break;
+
+				return true;
+				break;
+			default:
+				return false;
+		}
+	}
 }

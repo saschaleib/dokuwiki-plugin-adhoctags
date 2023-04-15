@@ -13,7 +13,6 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
     protected $special_pattern = '<%t%\b[^>\r\n]*?/>';
     protected $entry_pattern   = '<%t%\b.*?>(?=.*?</%t%>)';
     protected $exit_pattern    = '</%t%>';
-	protected $extra_attr		= array(); /* non-standard attributes allowed in some instances */
 	protected $enabled			= false; /* will be set by the constructors of instances */
 	protected $output_tag		= null;  /* allows overriding the tag name for output */
 	protected $configName		= 'allowedElements';
@@ -41,6 +40,11 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
 			return parent::accepts($mode);
 		}
     }
+	
+	/* allow additional attributes by overriding this function: */
+	function allowAttribute(&$name, &$value) {
+		return false;
+	}
 
     /**
      * Connect pattern to lexer
@@ -163,7 +167,7 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
                 case DOKU_LEXER_ENTER:
                 case DOKU_LEXER_SPECIAL:
                     $wrap = $this->loadHelper('adhoctags', true);
-                    $attr = $wrap->buildAttributes($data, $this->extra_attr);
+                    $attr = $wrap->buildAttributes($data, $this);
 
                     $renderer->doc .= '<'.$outTag . $attr.'>';
                     if ($state == DOKU_LEXER_SPECIAL) $renderer->doc .= '</'.$outTag.'>';
