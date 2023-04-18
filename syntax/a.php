@@ -49,4 +49,18 @@ class syntax_plugin_adhoctags_a extends syntax_plugin_adhoctags_abstractinline {
 				return false;
 		}
 	}
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		
+		$helper = $this->loadHelper('adhoctags', true);
+		$attr = $helper->getAttributes($data);
+		$href = ( array_key_exists('href', $attr) ? $attr['href'] : '#' );
+		$renderer->externallink($href, '#');
+		$renderer->underline_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->underline_close();
+    }
 }
