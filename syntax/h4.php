@@ -13,4 +13,16 @@
 class syntax_plugin_adhoctags_h4 extends syntax_plugin_adhoctags_abstractheadline {
 
 	protected $tag	= 'h4';
+
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->p_open();
+		$renderer->strong_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->strong_close();
+ 		$renderer->p_close();
+   }
 }
