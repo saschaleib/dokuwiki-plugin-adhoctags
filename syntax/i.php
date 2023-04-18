@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_i extends syntax_plugin_adhoctags_abstractinline {
 
 	protected $tag	= 'i';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->emphasis_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->emphasis_close();
+    }
 }

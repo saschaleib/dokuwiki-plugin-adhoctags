@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_var extends syntax_plugin_adhoctags_abstractinline
 
 	protected $tag	= 'var';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->emphasis_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->emphasis_close();
+    }
 }

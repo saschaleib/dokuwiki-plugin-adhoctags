@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_strong extends syntax_plugin_adhoctags_abstractinl
 
 	protected $tag	= 'strong';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->strong_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->strong_close();
+    }
 }

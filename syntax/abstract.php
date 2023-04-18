@@ -11,7 +11,7 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
 
 	protected $tag				= null;
     protected $special_pattern = '<%t%\b[^>\r\n]*?/>';
-    protected $entry_pattern   = '<%t%\b.*?>(?=.*?</%t%>)';
+    protected $entry_pattern   = '<%t%\b[^>]*>(?=.*?</%t%>)';
     protected $exit_pattern    = '</%t%>';
 	protected $enabled			= false; /* will be set by the constructors of instances */
 	protected $output_tag		= null;  /* allows overriding the tag name for output */
@@ -182,19 +182,35 @@ class syntax_plugin_adhoctags_abstract extends DokuWiki_Syntax_Plugin {
         if($format == 'odt'){
             switch ($state) {
                 case DOKU_LEXER_ENTER:
-                    $wrap = plugin_load('helper', 'adhoctags');
-                    array_push ($type_stack, $wrap->renderODTElementOpen($renderer, $outTag , $data));
+                    array_push ($type_stack, $this->renderODTElementOpen($renderer, $outTag , $data));
                     break;
+
+                case DOKU_LEXER_SPECIAL:
+
 
                 case DOKU_LEXER_EXIT:
                     $element = array_pop ($type_stack);
-                    $wrap = plugin_load('helper', 'adhoctags');
-                    $wrap->renderODTElementClose ($renderer, $element);
+                    $this->renderODTElementClose ($renderer, $element);
                     break;
-            }
+            } 
             return true;
         }
         return false;
+    }
+
+    /**
+     * render ODT element, Open
+     * (get Attributes, select ODT element that fits, render it, return element name)
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		//dbg('renderODTElementOpen: ' . $HTMLelement);
+    }
+
+    /**
+     * render ODT element, Close
+     */
+    function renderODTElementClose($renderer, $element) {
+		//dbg('renderODTElementClose: ' . $element);
     }
 
 }

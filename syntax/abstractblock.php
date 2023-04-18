@@ -18,4 +18,19 @@ class syntax_plugin_adhoctags_abstractblock extends syntax_plugin_adhoctags_abst
 	}
     function getPType(){ return 'stack';}
 
+    /**
+     * render ODT element, Open
+     * (get Attributes, select ODT element that fits, render it, return element name)
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->p_open();
+    }
+
+    /**
+     * render ODT element, Close
+     */
+    function renderODTElementClose($renderer, $element) {
+		$renderer->p_close();
+    }
+
 }

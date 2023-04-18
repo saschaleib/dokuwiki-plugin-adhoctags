@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_cite extends syntax_plugin_adhoctags_abstractinlin
 
 	protected $tag	= 'cite';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->emphasis_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->emphasis_close();
+    }
 }

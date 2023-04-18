@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_u extends syntax_plugin_adhoctags_abstractinline {
 
 	protected $tag	= 'u';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->underline_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->underline_close();
+    }
 }

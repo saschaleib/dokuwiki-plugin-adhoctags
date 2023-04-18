@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_s extends syntax_plugin_adhoctags_abstractinline {
 
 	protected $tag	= 's';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->deleted_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->deleted_close();
+    }
 }

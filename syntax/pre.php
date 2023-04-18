@@ -19,4 +19,5 @@ class syntax_plugin_adhoctags_pre extends syntax_plugin_adhoctags_abstractblock 
 	}
 
 	function getPType() { return 'normal'; }
+
 }

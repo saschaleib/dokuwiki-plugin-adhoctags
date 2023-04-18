@@ -10,4 +10,5 @@
 class syntax_plugin_adhoctags_abstractheadline extends syntax_plugin_adhoctags_abstractblock {
 
     function getPType(){ return 'block';}
+
 }

@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_samp extends syntax_plugin_adhoctags_abstractinlin
 
 	protected $tag	= 'samp';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->monospace_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->monospace_close();
+    }
 }

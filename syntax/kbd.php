@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_kbd extends syntax_plugin_adhoctags_abstractinline
 
 	protected $tag	= 'kbd';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->monospace_open();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->monospace_close();
+    }
 }

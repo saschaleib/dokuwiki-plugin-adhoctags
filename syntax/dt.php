@@ -14,4 +14,14 @@ class syntax_plugin_adhoctags_dt extends syntax_plugin_adhoctags_abstractheadlin
 
 	protected $tag	= 'dt';
 
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->p_open();
+		$renderer->strong_open();
+    }
+
+    function renderODTElementClose($renderer, $element) {
+		$renderer->strong_close();
+		$renderer->p_close();
+    }
+
 }

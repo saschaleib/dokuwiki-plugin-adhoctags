@@ -13,5 +13,4 @@
 class syntax_plugin_adhoctags_h4 extends syntax_plugin_adhoctags_abstractheadline {
 
 	protected $tag	= 'h4';
-
 }

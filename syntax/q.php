@@ -14,4 +14,13 @@ class syntax_plugin_adhoctags_q extends syntax_plugin_adhoctags_abstractinline {
 
 	protected $tag	= 'q';
 
+    /**
+     * ODT Renderer Functions
+     */
+    function renderODTElementOpen($renderer, $HTMLelement, $data) {
+		$renderer->doublequoteopening();
+    }
+    function renderODTElementClose($renderer, $element) {
+		$renderer->doublequoteclosing();
+    }
 }
