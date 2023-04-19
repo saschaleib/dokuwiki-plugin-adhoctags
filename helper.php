@@ -3,8 +3,8 @@
  * Helper Component for the Ad Hoc Tags Plugin
  *
  * @license	GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author	 Anika Henke <anika@selfthinker.org>
- * @author	 Sascha Leib <sascha.leib(at)kolmio.com>
+ * @author Anika Henke <anika@selfthinker.org>
+ * @author Sascha Leib <sascha.leib(at)kolmio.com>
  */
 
 class helper_plugin_adhoctags extends DokuWiki_Plugin {
@@ -15,9 +15,6 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 	static protected $rtlscripts = array('arab','thaa','hebr','deva','shrd');
 	/* selection of left-to-right scripts (may override the language defaults to ltr) */
 	static protected $ltrscripts = array('latn','cyrl','grek','cyrs','armn');
-	/* tag attributes that are always allowed: */
-	static protected $globalattr = array('dir','hidden','is','itemid','itemprop','itemref','itemscope','itemtype','role','tabindex');
-
 
 	/* Helper plugins should return info about the methods supported. */
 	public function getMethods() {
@@ -122,6 +119,7 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 	 * get attributes (pull apart the string between '<wrap' and '>')
 	 *  and identify classes, width, lang and dir
 	 *
+	 * @author Sascha Leib <sascha.leib(at)kolmio.com>
 	 * @author Anika Henke <anika@selfthinker.org>
 	 * @author Christopher Smith <chris@jalakai.co.uk>
 	 *   (parts taken from http://www.dokuwiki.org/plugin:box)

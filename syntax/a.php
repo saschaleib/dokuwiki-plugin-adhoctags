@@ -16,7 +16,6 @@ class syntax_plugin_adhoctags_a extends syntax_plugin_adhoctags_abstractinline {
 
 	/* allow link attributes: */
 	function allowAttribute(&$name, &$value) {
-		//dbg('<a>:allowAttribute(' . $name . ', "' . $value . '")');
 
 		switch ($name) {
 			case 'href':
@@ -49,7 +48,8 @@ class syntax_plugin_adhoctags_a extends syntax_plugin_adhoctags_abstractinline {
 				return false;
 		}
 	}
-    /**
+	
+	/**
      * ODT Renderer Functions
      */
     function renderODTElementOpen($renderer, $HTMLelement, $data) {
