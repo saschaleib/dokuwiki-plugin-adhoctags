@@ -92,9 +92,14 @@ class helper_plugin_adhoctags extends DokuWiki_Plugin {
 
 					default:
 					
-						/* special case: data- attributes: */
+						/* special case 1: data-* attributes: */
 						if (preg_match('/^data-[a-z][a-z0-9_-]*$/', $key)) {
-							$out .= ' '.$key.'="'.hsc(strtolower($val)).'"';
+							$out .= ' '.$key.'="'.hsc($val).'"';
+						}
+
+						/* special case 2: aria-* attributes: */
+						if (preg_match('/^aria-[a-z]+$/', $key)) {
+							$out .= ' '.$key.'="'.hsc($val).'"';
 						}
 					
 						/* any other attribute: ask the class if it is allowed: */
