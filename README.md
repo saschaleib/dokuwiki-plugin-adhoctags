@@ -1,13 +1,13 @@
-# DokuWiki Plugin Ad-Hoc Tags
+# DokuWiki Plugin Ad-Hoc HTML
 A secure but flexible way to insert HTML tags into DokuWiki
 
-This is an attempt to enable direct insertion of HTML tags in DokuWiki that is not reliant on the HTML option, which will not be available any more in the near future.
+This is an attempt to enable direct insertion of HTML tags in DokuWiki that is not reliant on the HTML option, which is no longer available in current versions of DokuWiki.
 
 More information on the [Plugin Page on DokuWiki](https://www.dokuwiki.org/plugin:adhoctags).
 
-## Tags/Elements
+## HTML Elements
 
-The following HTML tags are added by this plugin (in alphabetic order):
+The following HTML elements are added by this plugin (in alphabetic order):
 
 - `<abbr>` – “[Abbreviation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr)”
 
@@ -32,6 +32,8 @@ The following HTML tags are added by this plugin (in alphabetic order):
 - `<div>` – “[Generic block](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)”
 
 - `<figure>` – “[Figure](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure)” and `<figcaption>` – “[Figure caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption)”
+
+- `<header>` – “[Header](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header)” and `<footer>` – “[Footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer)”
 
 - `<h1>` … `<h6>` – “[Section Heading Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)”
 
