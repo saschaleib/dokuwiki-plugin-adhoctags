@@ -23,12 +23,14 @@ $lang['allowedElements'] = "Enable the following <abbr>HTML</abbr> tags:<br /><s
 	$lang['allowedElements_em'] = '<code>&lt;em&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em" target="_blank">emphasis</a>)';
 	$lang['allowedElements_figcaption'] = '<code>&lt;figcaption&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption" target="_blank">Fig. caption</a>)';
 	$lang['allowedElements_figure'] = '<code>&lt;figure&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure" target="_blank">figure</a>)';
+	$lang['allowedElements_footer'] = '<code>&lt;footer&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer" target="_blank">footer block</a>)';
 	$lang['allowedElements_h1'] = '<code>&lt;h1&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements" target="_blank">heading level 1</a>)';
 	$lang['allowedElements_h2'] = '<code>&lt;h2&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements" target="_blank">heading level 2</a>)';
 	$lang['allowedElements_h3'] = '<code>&lt;h3&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements" target="_blank">heading level 3</a>)';
 	$lang['allowedElements_h4'] = '<code>&lt;h4&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements" target="_blank">heading level 4</a>)';
 	$lang['allowedElements_h5'] = '<code>&lt;h5&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements" target="_blank">heading level 5</a>)';
 	$lang['allowedElements_h6'] = '<code>&lt;h6&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements" target="_blank">heading level 6</a>)';
+	$lang['allowedElements_header'] = '<code>&lt;header&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header" target="_blank">header block</a>)';
 	$lang['allowedElements_i'] = '<code>&lt;i&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i" target="_blank">idiomatic text</a>)';
 	$lang['allowedElements_kbd'] = '<code>&lt;kbd&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd" target="_blank">keyboard input</a>)';
 	$lang['allowedElements_mark'] = '<code>&lt;mark&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark" target="_blank">mark text</a>)';
