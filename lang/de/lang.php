@@ -1,28 +1,28 @@
 <?php
 
-$lang['picker']    = 'Ad-Hoc Tags';
+$lang['picker']		= 'Ad-Hoc Tags';
 
-$lang['b']		= 'Aufmerksamkeit (fettdruck)';
-$lang['i']		= 'Idiomatisch (kursiv)';
-$lang['s']		= 'Durchgestrichen';
-$lang['u']		= 'Hervorhebung (unterstrichen)';
-$lang['small']	= 'Randbemerkung (kleiner)';
-$lang['cite']	= 'Quellenangabe';
-$lang['q']		= 'Inline-Zitat';
-$lang['abbr']	= 'Abkürzung';
-$lang['dfn']	= 'Definition';
-$lang['kbd']	= 'Tastatureingabe';
-$lang['samp']	= 'Ausgabebeispiel';
-$lang['var']	= 'Variable';
-$lang['mark']	= 'Textmarker';
-$lang['time']	= 'Datum/Uhrzeit';
-
-$lang['dl']		= 'Description List';
-$lang['figure']		= 'Abbildung + Bildunterschrift';
-$lang['article']	= 'Artikelblock';
-$lang['section']	= 'Thematische Gruppe';
-$lang['aside']		= 'Nachgeordnete Inhalte';
+$lang['abbr']		= 'Abkürzung';
 $lang['address']	= 'Kontaktadresse';
+$lang['article']	= 'Artikelblock';
+$lang['aside']		= 'Nachgeordnete Inhalte';
+$lang['b']			= 'Aufmerksamkeit (fettdruck)';
+$lang['cite']		= 'Quellenangabe';
 $lang['details']	= 'Details + Zusammenfassung';
-
-$lang['iframe']		= 'Inline Frame';
+$lang['dfn']		= 'Definition';
+$lang['dl']			= 'Description List';
+$lang['figure']		= 'Abbildung + Bildunterschrift';
+$lang['i']			= 'Idiomatisch (kursiv)';
+$lang['iframe']		= 'Eingebettetes Dokument';
+$lang['img']		= 'Bild';
+$lang['kbd']		= 'Tastatureingabe';
+$lang['mark']		= 'Textmarker';
+$lang['q']			= 'Inline-Zitat';
+$lang['s']			= 'Durchgestrichen';
+$lang['samp']		= 'Ausgabebeispiel';
+$lang['section']	= 'Thematische Gruppe';
+$lang['small']		= 'Randbemerkung (kleiner)';
+$lang['time']		= 'Datum/Uhrzeit';
+$lang['u']			= 'Hervorhebung (unterstrichen)';
+$lang['var']		= 'Variable';
+	

@@ -5,27 +5,26 @@
 
 $lang['picker']    = 'Éléments HTML en ligne';
 
-$lang['b']		= 'Portant à l’attention (gras) ';
-$lang['i']		= 'Texte idiomatique (italique) ';
-$lang['s']		= 'Texte barré ';
-$lang['u']		= 'Annotation non articulée (souligné) ';
-$lang['small']	= 'Commentaire complémentaire (petit) ';
-$lang['cite']	= 'Citation ';
-$lang['q']		= 'Citation en incise ';
 $lang['abbr']	= 'Abréviation ';
+$lang['address']	= 'Adresse de contact';
+$lang['article']	= 'Article';
+$lang['aside']		= 'Élément aparté';
+$lang['b']		= 'Portant à l’attention (gras) ';
+$lang['cite']	= 'Citation ';
+$lang['details']	= 'Détails + résumé';
 $lang['dfn']	= 'Définition ';
-$lang['kbd']	= 'Saisie clavier ';
-$lang['samp']	= 'Échantillon en sortie ';
-$lang['var']	= 'Variable ';
-$lang['mark']	= 'Marquage ';
-$lang['time']	= 'Date/temps ';
-
 $lang['dl']		= 'Liste de descriptions';
 $lang['figure']		= 'Figure avec légende';
-$lang['article']	= 'Article';
-$lang['section']	= 'Section générique';
-$lang['aside']		= 'Élément aparté';
-$lang['address']	= 'Adresse de contact';
-$lang['details']	= 'Détails + résumé';
-
+$lang['i']		= 'Texte idiomatique (italique) ';
 $lang['iframe']		= 'Inline Frame';
+$lang['img']		= 'Image';
+$lang['kbd']	= 'Saisie clavier ';
+$lang['mark']	= 'Marquage ';
+$lang['q']		= 'Citation en incise ';
+$lang['s']		= 'Texte barré ';
+$lang['samp']	= 'Échantillon en sortie ';
+$lang['section']	= 'Section générique';
+$lang['small']	= 'Commentaire complémentaire (petit) ';
+$lang['time']	= 'Date/temps ';
+$lang['u']		= 'Annotation non articulée (souligné) ';
+$lang['var']	= 'Variable ';

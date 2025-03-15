@@ -10,37 +10,38 @@
  * @author     Sascha Leib <sascha.leib(at)kolmio.com>
  */
 
-class syntax_plugin_adhoctags_iframe extends syntax_plugin_adhoctags_abstractblock {
+class syntax_plugin_adhoctags_img extends syntax_plugin_adhoctags_abstractblock {
 
-	protected $tag	= 'iframe';
+    protected $special_pattern = '<%t%\b[^>\r\n]*?>';
+	protected $tag	= 'img';
 	
 	/* allow link attributes: */
 	function allowAttribute(&$name, &$value) {
 
 		switch ($name) {
-			case 'allow':
-				return true;
+			case 'src':
+				return true; /* allow any URL! */
+				break;
 
 			case 'height':
 			case 'width':
 				return (preg_match('/^\d+$/', trim($value)));
 				break;
 
-			case 'src':
-				return true; /* allow any URL! */
+			case 'crossorigin':
+				return in_array($value, array('anonymous','use-credentials'));
 				break;
 
-			case 'sandbox':
-			case 'referrerpolicy':
-				return (preg_match('/^[\w\-]+$/', trim($value)));
-				break;
-				
-			case 'name':
-				return (preg_match('/^[\w\d_\-]+$/', trim($value)));
+			case 'decoding':
+				return in_array($value, array('sync','async','auto'));
 				break;
 
 			case 'loading':
 				return in_array($value, array('eager','lazy'));
+				break;
+
+			case 'referrerpolicy':
+				return (preg_match('/^[\w\-]+$/', trim($value)));
 				break;
 
 			default:
