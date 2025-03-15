@@ -27,3 +27,5 @@ $lang['section']	= 'Section générique';
 $lang['aside']		= 'Élément aparté';
 $lang['address']	= 'Adresse de contact';
 $lang['details']	= 'Détails + résumé';
+
+$lang['iframe']		= 'Inline Frame';

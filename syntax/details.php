@@ -16,7 +16,6 @@ class syntax_plugin_adhoctags_details extends syntax_plugin_adhoctags_abstractbl
 
 	/* allow link attributes: */
 	function allowAttribute(&$name, &$value) {
-		//dbg('<details>:allowAttribute(' . $name . ', "' . $value . '")');
 		
 		return ( $name == 'open' && in_array($value, array('','open')) );
 

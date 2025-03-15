@@ -22,3 +22,5 @@ $lang['inlineElements'] = "Activer les balises <i>en ligne</i> suivantes:<br /><
 	$lang['inlineElements_u'] = '<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/u" target="_blank">Annotation non articulée</a> : <code>&lt;u&gt;</code>';
 	$lang['inlineElements_var'] = '<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/var" target="_blank">Variable</a> : <code>&lt;var&gt;</code>';
 	$lang['inlineElements_pre'] = '<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/pre" target="_blank">Préformaté</a> : <code>&lt;pre&gt;</code>';
+
+	$lang['allowedElements_iframe'] = '<code>&lt;iframe&gt;</code> (<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/iframe" target="_blank">cadre intégré</a>)';

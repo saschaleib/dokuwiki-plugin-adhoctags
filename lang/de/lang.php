@@ -24,3 +24,5 @@ $lang['section']	= 'Thematische Gruppe';
 $lang['aside']		= 'Nachgeordnete Inhalte';
 $lang['address']	= 'Kontaktadresse';
 $lang['details']	= 'Details + Zusammenfassung';
+
+$lang['iframe']		= 'Inline Frame';

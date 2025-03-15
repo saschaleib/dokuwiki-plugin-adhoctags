@@ -24,3 +24,5 @@ $lang['section']	= 'Generic section';
 $lang['aside']		= 'Aside block';
 $lang['address']	= 'Contact address';
 $lang['details']	= 'Details + Summary';
+
+$lang['iframe']		= 'Inline Frame';

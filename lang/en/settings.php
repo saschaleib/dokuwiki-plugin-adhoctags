@@ -46,6 +46,7 @@ $lang['allowedElements'] = "Enable the following <abbr>HTML</abbr> tags:<br /><s
 	$lang['allowedElements_time'] = '<code>&lt;time&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time" target="_blank">date/time</a>)';
 	$lang['allowedElements_u'] = '<code>&lt;u&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u" target="_blank">unarticulated annotation</a>)';
 	$lang['allowedElements_var'] = '<code>&lt;var&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var" target="_blank">variable</a>)';
+	$lang['allowedElements_iframe'] = '<code>&lt;iframe&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank">inline frame</a>)';
 
 $lang['allowStyle'] = "Allow <em>inline styles</em>:<br /><small>(Limited support, only rather simple styles will work)</code>)</small>";
 $lang['allowJSLinks'] = "Allow <code>javascript:</code>-<abbr>URL</abbr>s in <code>&lt;a&gt;</code> (<b style='color:red'>experimental</b>):<br /><small>(Important: read the <a href='https://www.dokuwiki.org/plugin:adhoctags#security' target='_blank'>security advisory</a> before enabling this feature!)</small>";
