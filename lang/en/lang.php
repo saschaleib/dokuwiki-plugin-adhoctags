@@ -1,28 +1,27 @@
 <?php
 
-$lang['picker']    = 'Ad-Hoc Tags';
+$lang['picker']		= 'Ad-Hoc HTML Elements';
 
-$lang['b']		= 'Bring attention to (bold)';
-$lang['i']		= 'Idiomatic text (italic)';
-$lang['s']		= 'Strikethrough';
-$lang['u']		= 'Unarticulated annotation (underline)';
-$lang['small']	= 'Side comment (smaller)';
-$lang['cite']	= 'Citation';
-$lang['q']		= 'Inline quotation';
-$lang['abbr']	= 'Abbreviation';
-$lang['dfn']	= 'Definition';
-$lang['kbd']	= 'Keyboard';
-$lang['samp']	= 'Sample output';
-$lang['var']	= 'Variable';
-$lang['mark']	= 'Marked text';
-$lang['time']	= 'Date/Time';
-
-$lang['dl']		= 'Description List';
-$lang['figure']		= 'Figure + Caption';
-$lang['article']	= 'Article block';
-$lang['section']	= 'Generic section';
-$lang['aside']		= 'Aside block';
+$lang['abbr']		= 'Abbreviation';
 $lang['address']	= 'Contact address';
-$lang['details']	= 'Details + Summary';
-
+$lang['article']	= 'Article block';
+$lang['aside']		= 'Aside block';
+$lang['b']			= 'Bring attention to';
+$lang['cite']		= 'Citation';
+$lang['details']	= 'Expandable section';
+$lang['dfn']		= 'Definition';
+$lang['dl']			= 'Description List';
+$lang['figure']		= 'Figure + Caption';
+$lang['i']			= 'Idiomatic text';
 $lang['iframe']		= 'Inline Frame';
+$lang['img']		= 'Image';
+$lang['kbd']		= 'Keyboard';
+$lang['mark']		= 'Marked text';
+$lang['q']			= 'Inline quotation';
+$lang['s']			= 'Strikethrough';
+$lang['samp']		= 'Sample output';
+$lang['section']	= 'Generic section';
+$lang['small']		= 'Side comment (smaller)';
+$lang['time']		= 'Date/Time';
+$lang['u']			= 'Unarticulated annotation';
+$lang['var']		= 'Variable';
