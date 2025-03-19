@@ -254,7 +254,7 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 				'icon'		=> '../../plugins/adhoctags/images/card-account-details-outline.svg',
 				'open'		=> '<address>\n',
 				'close'		=> '\n</address>',
-				'sample'	=> 'Address' . print_r($allowedElements, true)
+				'sample'	=> 'Address'
 			));
 		};
 		/* details + summary */
