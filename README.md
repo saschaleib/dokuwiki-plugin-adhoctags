@@ -39,6 +39,10 @@ The following HTML elements are added by this plugin (in alphabetic order):
 
 - `<i>` – “[Idiomatic Text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)” (also known as “italic”)
 
+- `<iframe>` – “[Embedded document](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)”
+
+- `<img>` – “[Image](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)”
+
 - `<kbd>` – “[Keyboard Input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)”
 
 - `<mark>` — “[Mark text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)”
