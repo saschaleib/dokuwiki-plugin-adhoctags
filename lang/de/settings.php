@@ -27,5 +27,11 @@ $lang['allowedElements_time'] = '<code>&lt;time&gt;</code> (<a href="https://wik
 $lang['allowedElements_u'] = '<code>&lt;u&gt;</code> (<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/u" target="_blank">Hervorhebung</a>)';
 $lang['allowedElements_var'] = '<code>&lt;var&gt;</code> (<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/var" target="_blank">Variable</a>)';
 
+$lang['allowedElements_ul'] = '<code>&lt;ul&gt;</code> (<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/ul" target="_blank">ungeordnete Liste</a>)';
+$lang['allowedElements_ol'] = '<code>&lt;ol&gt;</code> (<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/ol" target="_blank">geordnete Liste</a>)';
+$lang['allowedElements_li'] = '<code>&lt;li&gt;</code> (<a href="https://wiki.selfhtml.org/wiki/HTML/Elemente/li" target="_blank">Listenelement</a>)';
+
+
 $lang['allowStyle'] = "Erlaube <em>inline-Style</em>:<br /><small>(Eingeschränkte Unterstützung, nur eher einfache Stile funktionieren)</code>)</small>";
 $lang['allowJSLinks'] = "Erlaube <code>javascript:</code>-<abbr>URL</abbr>s in <code>&lt;a&gt;</code> (<b style='color:red'>experimentell!</b>):<br /><small>(Wichtig: vor Aktivierung unbedingt die <a href='https://www.dokuwiki.org/plugin:adhoctags#security' target='_blank'>Sicherheitshinweise</a> beachten!)</small>";
+$lang['iFrameExtSrc'] = "Erlaube externe Links in <code>&lt;iframe&gt;</code> <code>src</code> Attributen:<br><small>(Wichtig: Diese Option zu aktivieren kann negative Auswirkungen auf die Sicherheit des Wikis haben!)</small>";

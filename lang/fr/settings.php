@@ -26,5 +26,9 @@ $lang['allowedElements_time'] = '<code>&lt;time&gt;</code> : <a href="https://d
 $lang['allowedElements_u'] = '<code>&lt;u&gt;</code> : <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/u" target="_blank">Annotation non articulée</a>';
 $lang['allowedElements_var'] = '<code>&lt;var&gt;</code> : <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/var" target="_blank">Variable</a>';
 
+$lang['allowedElements_ul'] = '<code>&lt;ul&gt;</code> (<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/ul" target="_blank">liste sans ordre</a>)';
+$lang['allowedElements_ol'] = '<code>&lt;ol&gt;</code> (<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/ol" target="_blank">liste ordonnée</a>)';
+$lang['allowedElements_li'] = '<code>&lt;li&gt;</code> (<a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/li" target="_blank">élément de liste</a>)';
+
 $lang['allowStyle'] = "Autoriser les <em>styles inline</em>:<br /><small>(Prise en charge limitée, seuls les styles assez simples fonctionneront)</code>)</small>";
 $lang['allowJSLinks'] = "Autoriser les <abbr>ULR</abbr> <code>javascript:</code> dans les éléments <code>&lt;a&gt;</code> (<b style='color:red'>experimental</b>):<br /><small>(Important : lisez l’<a href='https://www.dokuwiki.org/plugin:adhoctags#security' target='_blank'>avis de sécurité</a> avant d’activer cette fonction !)</small>";

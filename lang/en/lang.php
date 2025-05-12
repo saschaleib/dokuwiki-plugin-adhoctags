@@ -25,3 +25,7 @@ $lang['small']		= 'Side comment (smaller)';
 $lang['time']		= 'Date/Time';
 $lang['u']			= 'Unarticulated annotation';
 $lang['var']		= 'Variable';
+$lang['ul']			= 'Unordered list';
+$lang['ol']			= 'Ordered list';
+$lang['li']			= 'List item';
+$lang['menu']		= 'Menu list';
