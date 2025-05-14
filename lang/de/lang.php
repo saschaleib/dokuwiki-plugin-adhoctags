@@ -25,4 +25,7 @@ $lang['small']		= 'Randbemerkung';
 $lang['time']		= 'Datum/Uhrzeit';
 $lang['u']			= 'Hervorhebung';
 $lang['var']		= 'Variable';
-	
+$lang['ul']			= 'Ungeordnete Liste';
+$lang['ol']			= 'Geordnete Liste';
+$lang['li']			= 'Listenelement';
+$lang['menu']		= 'Menüliste';

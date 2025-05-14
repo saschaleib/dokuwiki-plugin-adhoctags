@@ -246,6 +246,28 @@ class action_plugin_adhoctags extends DokuWiki_Action_Plugin {
 				'sample'	=> 'Term'
 			));
 		};
+		/* unordered lists */
+		if (in_array('ul', $allowedElements) && in_array('li', $allowedElements)) {
+			array_push($iconList, array(
+				'type'		=> 'format',
+				'title'		=> $this->getLang('ul').': <ul>/<li>',
+				'icon'		=> '../../plugins/adhoctags/images/definition-list.svg',
+				'open'		=> '<ul>\n<li>',
+				'close'		=> 'List item</li>\n</ul>',
+				'sample'	=> 'List item'
+			));
+		};
+		/* ordered lists */
+		if (in_array('ol', $allowedElements) && in_array('li', $allowedElements)) {
+			array_push($iconList, array(
+				'type'		=> 'format',
+				'title'		=> $this->getLang('ol').': <ol>/<li>',
+				'icon'		=> '../../plugins/adhoctags/images/definition-list.svg',
+				'open'		=> '<ol>\n<li>',
+				'close'		=> 'List item</li>\n</ol>',
+				'sample'	=> 'List item'
+			));
+		};
 		/* address */
 		if (in_array('address', $allowedElements)) {
 			array_push($iconList, array(

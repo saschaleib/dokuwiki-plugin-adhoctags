@@ -50,5 +50,11 @@ $lang['allowedElements_time'] = '<code>&lt;time&gt;</code> (<a href="https://dev
 $lang['allowedElements_u'] = '<code>&lt;u&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u" target="_blank">unarticulated annotation</a>)';
 $lang['allowedElements_var'] = '<code>&lt;var&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var" target="_blank">variable</a>)';
 
+$lang['allowedElements_ul'] = '<code>&lt;ul&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul" target="_blank">unordered list</a>)';
+$lang['allowedElements_menu'] = '<code>&lt;menu&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu" target="_blank">menu list</a>)';
+$lang['allowedElements_ol'] = '<code>&lt;ol&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol" target="_blank">ordered list</a>)';
+$lang['allowedElements_li'] = '<code>&lt;li&gt;</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li" target="_blank">list item</a>)';
+
 $lang['allowStyle'] = "Allow <em>inline styles</em>:<br /><small>(Limited support, only rather simple styles will work)</code>)</small>";
 $lang['allowJSLinks'] = "Allow <code>javascript:</code>-<abbr>URL</abbr>s in <code>&lt;a&gt;</code> (<b style='color:red'>experimental</b>):<br /><small>(Important: read the <a href='https://www.dokuwiki.org/plugin:adhoctags#security' target='_blank'>security advisory</a> before enabling this feature!)</small>";
+$lang['iFrameExtSrc'] = "Allow external links in <code>&lt;iframe&gt;</code>’s <code>src</code> attribute:<br><small>(Important: Activating this option can have security implications for your wiki!)</small>";
