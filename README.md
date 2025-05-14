@@ -45,8 +45,14 @@ The following HTML elements are added by this plugin (in alphabetic order):
 
 - `<kbd>` – “[Keyboard Input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)”
 
+- `<li>` – “[List item](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li)”
+
 - `<mark>` — “[Mark text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)”
 
+- `<menu>` – “[Menu list](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu)”
+
+- `<ol>` – “[Ordered list](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol)”
+  
 - `<pre>` – “[Preformatted Text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre)”
 
 - `<q>` – “[Inline Quotation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q)”
@@ -65,6 +71,8 @@ The following HTML elements are added by this plugin (in alphabetic order):
 
 - `<u>` – “[Unarticulated Annotation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u)” (also known as “underline”)
 
+- `<ul>` – “[Unordered list](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)”
+  
 - `<var>` – “[Variable](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var)”
 
 Please note that `<div>` and `<span>` are also handled by the [Wrap](https://github.com/selfthinker/dokuwiki_plugin_wrap) Plugin and having them enabled while Wrap is also active can lead to unexpected results. If you need the attribute features of this plugin with these tags, it is better to disable Wrap, and possibly use [Ad-Hoc Wrap](https://github.com/saschaleib/dokuwiki-plugin-adhocwrap) instead as a replacement.
