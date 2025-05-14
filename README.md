@@ -35,7 +35,9 @@ The following HTML elements are added by this plugin (in alphabetic order):
 
 - `<header>` – “[Header](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header)” and `<footer>` – “[Footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer)”
 
-- `<h1>` … `<h6>` – “[Section Heading Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)”
+- `<h1>` … `<h6>` – “[Section heading elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)”
+
+- `<hgroup>` – “[Heading group](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hgroup)”
 
 - `<i>` – “[Idiomatic Text](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)” (also known as “italic”)
 
@@ -99,7 +101,7 @@ Instead of specifying the attributes in the HTML format, this plugin replicates 
 
 - `[name=value]` – extended format for all other allowed attributes. For example, `[style=color:red]`, or `[dir=ltr]` to override the text direction set by the `:lang` attribute, etc.
 
-Generally, attributes can appear in any order and are always optional!
+Generally, attributes can appear in any order and are always optional! As a matter of principle, only attributes that are current and widely available are allowed by the plugin (i.e. no "deprecated" and no "experimental" attributes or attribute values).
 
 ## Migration Notes
 
