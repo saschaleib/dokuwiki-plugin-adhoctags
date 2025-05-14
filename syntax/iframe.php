@@ -34,10 +34,10 @@ class syntax_plugin_adhoctags_iframe extends syntax_plugin_adhoctags_abstractblo
 				 || substr($decodedVal, 2) == "//") {
 					return false;
 				} else {
-					return (preg_match('/^[\w\d\.\-_\/#%]+$/', trim($value)));; /* allow any URL without colon! */
+					return (preg_match("/^[\w\d\-\._~\/\?#\[\]@\!$&'()*+,;=%]+$/", trim($value)));; /* any URL without colon! */
 				}
 			} else {
-				return (preg_match('/^[\w\d\.\-_\/:#%]+$/', trim($value)));; /* allow any URL! */
+				return (preg_match("/^[\w\d\-\._~:\/\?#\[\]@\!$&'()*+,;=%]+$/", trim($value)));; /* allow any URL! */
 			}
 			break;
 
