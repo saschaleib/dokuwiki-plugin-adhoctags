@@ -3,7 +3,7 @@ A secure but flexible way to insert HTML tags into DokuWiki
 
 This is an attempt to enable direct insertion of HTML tags in DokuWiki that is not reliant on the HTML option, which is no longer available in current versions of DokuWiki.
 
-More information on the [Plugin Page on DokuWiki](https://www.dokuwiki.org/plugin:adhoctags).
+More information on the [Plugin Page on DokuWiki](https://www.dokuwiki.org/plugin:adhoctags) and the [Demo page](https://leib.be/sascha/projects/dokuwiki/ad-hoc/html) on the author's home site
 
 ## HTML Elements
 
